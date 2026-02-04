@@ -56,5 +56,9 @@ crashlytics-build.properties
 .idea/
 *.sln.iml
 *.csproj.iml
-*.unityproj.iml"Library/" 
-"**/Library/" 
+*.unityproj.iml	
+
+Project/Wo_oW/Library/
+Project/Wo_oW/Logs/
+Project/Wo_oW/UserSettings/
+Project/Wo_oW/obj/
