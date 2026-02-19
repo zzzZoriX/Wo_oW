@@ -3,6 +3,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public Vector3 Direction { get; private set; }
+    public float Damage { get; set; }
 
     public void Shoot(Vector3 direction, float lifeTime)
     {
