@@ -6,12 +6,18 @@ public class LazerGun : MonoBehaviour
     [SerializeField] private WeaponStats _stats;
     private Timer _cooldownRemaining;
     private Timer _coolingTimer;
+    private Timer _shotTimer; 
     private float _coolingFactor = 0f;
+    private bool _canShot = true;
 
     private void Start()
     {
         _cooldownRemaining = gameObject.AddComponent<Timer>();
         _coolingTimer = gameObject.AddComponent<Timer>();
+        
+        _shotTimer = gameObject.AddComponent<Timer>();
+        _shotTimer.DoWhile = false;
+        _shotTimer.Action += SetCanShot;
         
         _cooldownRemaining.DoWhile = false;
     }
@@ -129,13 +135,17 @@ public class LazerGun : MonoBehaviour
         _stats.currentHeatValue += addingHeatValue;
         if (_stats.currentHeatValue > _stats.maxHeatValue)
             _stats.currentHeatValue = _stats.maxHeatValue;
+
+        _stats.stability -= _stats.stabilityDecreaseFactor;
+        if (_stats.stability <= _stats.minStabilityValue)
+            _stats.stability = _stats.minStabilityValue;
     }
 
     private void StartCoolingCooldown()
     {
         if (_cooldownRemaining is null) return;
         
-        _cooldownRemaining?.Set(_stats.coolingCooldown);
+        _cooldownRemaining?.Set(_stats.coolingCooldown / _stats.stability);
         _cooldownRemaining.Action += OnCooldownEnd;
         
         _cooldownRemaining?.Run();
@@ -166,6 +176,7 @@ public class LazerGun : MonoBehaviour
         {
             _stats.currentHeatValue = 0f;
             _coolingTimer.Action -= Cooling;
+            _stats.stability = 1f;
         }
     }
 
@@ -174,9 +185,17 @@ public class LazerGun : MonoBehaviour
         return _stats.currentHeatValue * (_stats.maxCoolingTime / _stats.maxHeatValue);
     }
 
+    private void SetCanShot()
+        => _canShot = !_canShot;
+
 //  drawing aim ray
     private void OnDrawGizmos()
     {
         Debug.DrawRay(_stats.camera.transform.position, _stats.camera.transform.forward, Color.red);
+    }
+
+    private void OnDestroy()
+    {
+        _shotTimer.Action -= SetCanShot;
     }
 }

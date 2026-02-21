@@ -22,6 +22,9 @@ public class WeaponStats : MonoBehaviour
     [Header("Attack")] 
     public int count;
     public float speed;
+    public float stability = 1f;
+    public float stabilityDecreaseFactor = 0.07f;
+    public float minStabilityValue = 0.3f;
 
     [Header("Ability")] 
     public float AbilityHoldTimer = 0f;

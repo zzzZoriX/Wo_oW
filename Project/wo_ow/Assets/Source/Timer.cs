@@ -11,6 +11,12 @@ public class Timer : MonoBehaviour
     public void Set(float time) => Duration = time;
     public void Run() => Current = Duration;
 
+    public void SetNRun(float time)
+    {
+        Duration = time;
+        Current = Duration;
+    }
+
 
     private void Update()
     {
