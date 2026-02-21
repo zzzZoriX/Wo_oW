@@ -18,13 +18,14 @@ public class WeaponStats : MonoBehaviour
     public float heatPerAbility = 40f;
     public float currentHeatValue = 0f;
     public float maxCoolingTime = 10f;
+    public float stability = 1f;
+    public float shotStabilityDecreaseFactor = 0.07f;
+    public float abilityStabilityDecreaseFactor = 0.28f;
+    public float minStabilityValue = 0.3f;
 
     [Header("Attack")] 
     public int count;
     public float speed;
-    public float stability = 1f;
-    public float stabilityDecreaseFactor = 0.07f;
-    public float minStabilityValue = 0.3f;
 
     [Header("Ability")] 
     public float AbilityHoldTimer = 0f;

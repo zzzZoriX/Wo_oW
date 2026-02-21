@@ -45,6 +45,7 @@ public class LazerGun : MonoBehaviour
         Destroy(lazer, _stats.destroyTime);
 
         Heat("Shot");
+        ChangeStability(_stats.shotStabilityDecreaseFactor);
         StartCoolingCooldown();
     }
 
@@ -68,6 +69,7 @@ public class LazerGun : MonoBehaviour
                 _stats.AbilityReload = true;
                 
                 Heat("Ability");
+                ChangeStability(_stats.abilityStabilityDecreaseFactor);
                 StartCoolingCooldown();
             }
 
@@ -135,8 +137,11 @@ public class LazerGun : MonoBehaviour
         _stats.currentHeatValue += addingHeatValue;
         if (_stats.currentHeatValue > _stats.maxHeatValue)
             _stats.currentHeatValue = _stats.maxHeatValue;
+    }
 
-        _stats.stability -= _stats.stabilityDecreaseFactor;
+    private void ChangeStability(float stabilityDecreaseFactor)
+    {
+        _stats.stability -= stabilityDecreaseFactor;
         if (_stats.stability <= _stats.minStabilityValue)
             _stats.stability = _stats.minStabilityValue;
     }
