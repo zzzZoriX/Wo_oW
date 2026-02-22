@@ -2,9 +2,9 @@
 
 public abstract class Weapon : MonoBehaviour
 {
-    protected Temperature Temperature;
-    protected WeaponStats Stats;
-    protected WeaponStability Stability;
+    public Temperature Temperature;
+    public WeaponStats Stats;
+    public WeaponStability Stability;
     
     protected virtual void Shoot()
     { }

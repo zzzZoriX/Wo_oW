@@ -810,8 +810,10 @@ GameObject:
   - component: {fileID: 758582792}
   - component: {fileID: 758582791}
   - component: {fileID: 758582790}
-  - component: {fileID: 758582794}
   - component: {fileID: 758582795}
+  - component: {fileID: 758582794}
+  - component: {fileID: 758582797}
+  - component: {fileID: 758582796}
   m_Layer: 0
   m_Name: T_Gun
   m_TagString: Untagged
@@ -917,6 +919,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37488b4c746d814d8174f09924283b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Temperature: {fileID: 758582797}
+  Stats: {fileID: 758582795}
+  Stability: {fileID: 758582796}
 --- !u!114 &758582795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -956,6 +961,32 @@ MonoBehaviour:
     type: 3}
   abilityProjectile: {fileID: 5007465993302244178, guid: c2d392ac9185f644ea04dae1bc09d8c9,
     type: 3}
+--- !u!114 &758582796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758582789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fa9e3d50b1446abaed28428d8f82e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stats: {fileID: 758582795}
+--- !u!114 &758582797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758582789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3039bb05dee14223bcc445572ca75677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stats: {fileID: 758582795}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
