@@ -5,6 +5,7 @@ public class LazerGun : Weapon
     private void Update()
     {
         Shoot();
+        Ability();
     }
 
     protected override void Shoot()
