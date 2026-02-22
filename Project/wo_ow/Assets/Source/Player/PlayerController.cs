@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        _userData = UserData.Deserialize("./Assets/Source/Data/UserData.json");
+        _userData = DeserializeData.Deserialize<UserData>("./Assets/Source/Data/UserData.json");
     }
     
     private void Update()

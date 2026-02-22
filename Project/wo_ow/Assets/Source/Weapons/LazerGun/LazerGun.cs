@@ -28,7 +28,7 @@ public class LazerGun : MonoBehaviour
         Ability();
     }
 
-    private void Shoot()
+    private void Shoot() //
     {
         if(!Input.GetKeyDown(_stats.shootKey))
             return;

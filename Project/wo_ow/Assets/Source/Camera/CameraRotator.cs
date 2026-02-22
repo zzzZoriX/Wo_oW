@@ -9,7 +9,7 @@ public class CameraRotator : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        _userData = UserData.Deserialize("./Assets/Source/UserData.json");
+        _userData = DeserializeData.Deserialize<UserData>("./Assets/Source/UserData.json");
     }
 
     private void Update()
