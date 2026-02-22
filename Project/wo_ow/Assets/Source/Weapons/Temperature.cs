@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Temperature : MonoBehaviour
 {
+    public TemperatureStats TempStats { get; set; }
+
     [SerializeField] private WeaponStats _stats;
     private Timer _coolingTimer;
     private Timer _cooldownRemaining;
@@ -25,16 +27,16 @@ public class Temperature : MonoBehaviour
         switch (attackType)
         {
             case "Shot":
-                addingHeatValue = _stats.heatPerShot;
+                addingHeatValue = TempStats.HeatPerShot;
                 break;
             case "Ability":
-                addingHeatValue = _stats.heatPerAbility;
+                addingHeatValue = TempStats.HeatPerAbility;
                 break;
         }
 
         _stats.currentHeatValue += addingHeatValue;
-        if (_stats.currentHeatValue >= _stats.maxHeatValue)
-            _stats.currentHeatValue = _stats.maxHeatValue;
+        if (_stats.currentHeatValue >= TempStats.MaxHeatValue)
+            _stats.currentHeatValue = TempStats.MaxHeatValue;
     }
 
     public void StartCoolingCooldown()
@@ -76,6 +78,6 @@ public class Temperature : MonoBehaviour
 
     private float GetCoolingTime()
     {
-        return _stats.currentHeatValue * (_stats.maxCoolingTime / _stats.maxHeatValue);
+        return _stats.currentHeatValue * (_stats.maxCoolingTime / TempStats.MaxHeatValue);
     }
 }

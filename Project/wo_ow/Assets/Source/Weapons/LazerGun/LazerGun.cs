@@ -1,7 +1,21 @@
+using System;
 using UnityEngine;
 
 public class LazerGun : Weapon
 {
+    private LazerGunStats _lazerGunStats;
+
+
+    private void Start()
+    {
+        _lazerGunStats = DeserializeData.Deserialize<LazerGunStats>("./Assets/Source/Data/LazerGunData.json");
+        Temperature.TempStats = new TemperatureStats(
+            _lazerGunStats.MaxHeatValue,
+            _lazerGunStats.HeatPerAbility,
+            _lazerGunStats.HeatPerShot
+        );
+    }
+
     private void Update()
     {
         Shoot();
@@ -19,14 +33,14 @@ public class LazerGun : Weapon
             transform.rotation
         );
 
-        projectile.GetComponent<Bullet>().Damage = Stats.shotDamage;
+        projectile.GetComponent<Bullet>().Damage = _lazerGunStats.ShotDamage;
         projectile.GetComponent<Bullet>().Shoot(
-            Vector3.forward * Stats.speed,
+            Vector3.forward * _lazerGunStats.ProjectileSpeed,
             Stats.destroyTime
         );
         
         Temperature.Heat("Shot");
-        Stability.ChangeStability(Stats.shotStabilityDecreaseFactor);
+        Stability.ChangeStability(_lazerGunStats.ShotStabilityDecreaseFactor);
         Temperature.StartCoolingCooldown();
     }
 
@@ -40,9 +54,9 @@ public class LazerGun : Weapon
                 transform.rotation
             );
 
-            abilityProjectile.GetComponent<Bullet>().Damage = Stats.AbilityDamage;
+            abilityProjectile.GetComponent<Bullet>().Damage = _lazerGunStats.AbilityDamage;
             abilityProjectile.GetComponent<Bullet>().Shoot(
-                Vector3.up * Stats.speed,
+                Vector3.forward * _lazerGunStats.ProjectileSpeed,
                 Stats.AbilityProjectileLifeTime
             );
 
@@ -50,12 +64,12 @@ public class LazerGun : Weapon
             Stats.AbilityReload = true;
             
             Temperature.Heat("Ability");
-            Stability.ChangeStability(Stats.abilityStabilityDecreaseFactor);
+            Stability.ChangeStability(_lazerGunStats.AbilityStabilityDecreaseFactor);
             Temperature.StartCoolingCooldown();
         }
         else if (Stats.AbilityReload)
         {
-            if (Stats.AbilityReloadTimer >= Stats.AbilityReloadTime)
+            if (Stats.AbilityReloadTimer >= _lazerGunStats.AbilityReloadTime)
             {
                 Stats.AbilityReloadTimer = 0f;
                 Stats.AbilityReload = false;
@@ -68,9 +82,9 @@ public class LazerGun : Weapon
         
         if (Input.GetKey(Stats.AbilityKey))
         {
-            if (Stats.AbilityHoldTimer >= Stats.AbilityHoldTime)
+            if (Stats.AbilityHoldTimer >= _lazerGunStats.AbilityHoldTime)
             {
-                Stats.AbilityHoldTimer = Stats.AbilityHoldTime;
+                Stats.AbilityHoldTimer = _lazerGunStats.AbilityHoldTime;
                 Stats.AbilityReady = true;
             }
             else
