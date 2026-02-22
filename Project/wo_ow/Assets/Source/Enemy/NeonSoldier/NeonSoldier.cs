@@ -14,4 +14,13 @@ public class NeonSoldier : MonoBehaviour
     {
         _enemy.EnemyControls.MoveToTarget(_enemy.Stats.MoveSpeed);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Projectile"))
+        {
+            _enemy.TakeDamage(other.gameObject.GetComponent<Bullet>().Damage);
+            Destroy(other.gameObject);
+        }
+    }
 }

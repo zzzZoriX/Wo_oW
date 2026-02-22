@@ -26,12 +26,14 @@ public class WeaponStats : MonoBehaviour
     [Header("Attack")] 
     public int count;
     public float speed;
+    public float shotDamage = 3f;
 
     [Header("Ability")] 
     public float AbilityHoldTimer = 0f;
     public float AbilityReloadTimer = 0f;
     public bool AbilityReload = false;
     public bool AbilityReady = false;
+    public float AbilityDamage = 12f;
     
     [Header("PreFabs")]
     public GameObject projectile;

@@ -18,6 +18,7 @@ public class LazerGun : Weapon
             transform.rotation
         );
 
+        projectile.GetComponent<Bullet>().Damage = Stats.shotDamage;
         projectile.GetComponent<Bullet>().Shoot(
             Vector3.forward * Stats.speed,
             Stats.destroyTime
@@ -38,6 +39,7 @@ public class LazerGun : Weapon
                 transform.rotation
             );
 
+            abilityProjectile.GetComponent<Bullet>().Damage = Stats.AbilityDamage;
             abilityProjectile.GetComponent<Bullet>().Shoot(
                 Vector3.up * Stats.speed,
                 Stats.AbilityProjectileLifeTime

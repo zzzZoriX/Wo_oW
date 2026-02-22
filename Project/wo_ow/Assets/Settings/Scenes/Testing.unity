@@ -953,10 +953,12 @@ MonoBehaviour:
   minStabilityValue: 0.3
   count: 1
   speed: 0.5
+  shotDamage: 3
   AbilityHoldTimer: 0
   AbilityReloadTimer: 0
   AbilityReload: 0
   AbilityReady: 0
+  AbilityDamage: 12
   projectile: {fileID: 4821281255855558938, guid: 49e9eee356a28624c881463ea32fa74b,
     type: 3}
   abilityProjectile: {fileID: 5007465993302244178, guid: c2d392ac9185f644ea04dae1bc09d8c9,
