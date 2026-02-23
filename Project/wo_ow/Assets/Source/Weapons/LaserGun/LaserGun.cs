@@ -1,14 +1,14 @@
 using System;
 using UnityEngine;
 
-public class LazerGun : Weapon
+public class LaserGun : Weapon
 {
-    private LazerGunStats _lazerGunStats;
+    private LaserGunStats _lazerGunStats;
 
 
     private void Start()
     {
-        _lazerGunStats = DeserializeData.Deserialize<LazerGunStats>("./Assets/Source/Data/LazerGunData.json");
+        _lazerGunStats = DeserializeData.Deserialize<LaserGunStats>("./Assets/Source/Data/LazerGunData.json");
         Temperature.TempStats = new TemperatureStats(
             _lazerGunStats.MaxHeatValue,
             _lazerGunStats.HeatPerAbility,

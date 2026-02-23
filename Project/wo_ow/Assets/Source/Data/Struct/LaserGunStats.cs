@@ -1,4 +1,4 @@
-﻿public class LazerGunStats
+﻿public class LaserGunStats
 {
     public float AbilityDamage;
     public float AbilityStabilityDecreaseFactor;
