@@ -12,6 +12,11 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, lifeTime);
     }
 
+    public static GameObject InstanceBullet(Vector3 position, GameObject prefab, Quaternion rotation)
+    {
+        return Instantiate(prefab, position, rotation);
+    }
+
     private void Update()
     {
         transform.Translate(Direction, Space.Self);

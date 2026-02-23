@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     
     private UserData _userData;
 
-
     private void Start()
     {
         _userData = DeserializeData.Deserialize<UserData>("./Assets/Source/Data/UserData.json");
@@ -74,9 +73,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Move(Vector3 direction)
-    {
-        transform.Translate(direction * Time.deltaTime * _playerStats._moveSpeed, Space.Self);
-    }
+        => transform.Translate(direction * Time.deltaTime * _playerStats._moveSpeed, Space.Self);
 
     private void Jump()
     {

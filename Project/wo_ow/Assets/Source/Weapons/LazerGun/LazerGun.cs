@@ -26,10 +26,10 @@ public class LazerGun : Weapon
     {
         if (!Input.GetKeyDown(Stats.shootKey))
             return;
-        
-        var projectile = Instantiate(
+//         TODO: add auto-z-offset defining when player rotate
+        var projectile = Bullet.InstanceBullet(
+            transform.position + Stats.projectilesOffset,
             Stats.projectile,
-            transform.position,
             transform.rotation
         );
 

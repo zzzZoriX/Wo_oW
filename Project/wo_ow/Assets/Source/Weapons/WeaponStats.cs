@@ -7,6 +7,7 @@ public class WeaponStats : MonoBehaviour
     public int destroyTime = 2;
     public KeyCode shootKey = KeyCode.Mouse0;
     public KeyCode AbilityKey = KeyCode.Mouse1;
+    public Vector3 projectilesOffset;
     
     [Header("heating/cooling")]
     public float coolingCooldown = 1f;
