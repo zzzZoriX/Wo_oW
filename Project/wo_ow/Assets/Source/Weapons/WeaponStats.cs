@@ -14,6 +14,9 @@ public class WeaponStats : MonoBehaviour
     public float stability = 1f;
     public float minStabilityValue = 0.3f;
 
+    [Header("Attack")] 
+    public bool canAttack = true;
+
     [Header("Ability")] 
     public float AbilityHoldTimer = 0f;
     public float AbilityReloadTimer = 0f;

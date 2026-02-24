@@ -7,10 +7,13 @@ public abstract class Weapon : MonoBehaviour
     public WeaponStability Stability;
     public Transform ProjectileSpawnPoint;
     
-    protected virtual void Shoot()
+    public virtual void Shoot()
     { }
 
-    protected virtual void Ability()
+    public virtual void Ability()
+    { }
+
+    protected virtual void OnReloadEnd()
     { }
 
     public GameObject GetSpecificChildren(string name)

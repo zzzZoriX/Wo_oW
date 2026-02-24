@@ -5,10 +5,15 @@ public class LaserGun : Weapon
 {
     private LaserGunStats _lazerGunStats;
     private WeaponAnimator _laserGunAnimator;
+    private Timer _reloadTimer;
 
 
     private void Start()
     {
+        _reloadTimer = gameObject.AddComponent<Timer>();
+        _reloadTimer.Action += OnReloadEnd;
+        _reloadTimer.DoWhile = false;
+        
         _lazerGunStats = DeserializeData.Deserialize<LaserGunStats>("./Assets/Source/Data/LaserGunData.json");
         Temperature.TempStats = new TemperatureStats(
             _lazerGunStats.MaxHeatValue,
@@ -19,15 +24,20 @@ public class LaserGun : Weapon
         _laserGunAnimator = GetSpecificChildren("LaserGunTexture").GetComponent<WeaponAnimator>();
     }
 
+    private void OnDestroy()
+    {
+        _reloadTimer.Action -= OnReloadEnd;
+    }
+
     private void Update()
     {
         Shoot();
         Ability();
     }
 
-    protected override void Shoot()
+    public override void Shoot()
     {
-        if (!Input.GetKeyDown(Stats.shootKey))
+        if (!Input.GetKeyDown(Stats.shootKey) || !Stats.canAttack)
             return;
         
         var projectile = Bullet.InstanceBullet(
@@ -50,10 +60,17 @@ public class LaserGun : Weapon
         Temperature.StartCoolingCooldown();
         
         _laserGunAnimator.SetShotParameter();
+
+        Stats.canAttack = false;
+        _reloadTimer.Set(_lazerGunStats.ShotReloadTime);
+        _reloadTimer.Run();
     }
 
-    protected override void Ability()
+    public override void Ability()
     {
+        if (!Stats.canAttack)
+            return;
+        
         if (Stats.AbilityReady && Input.GetKeyUp(Stats.AbilityKey))
         {
             var abilityProjectile = Bullet.InstanceBullet(
@@ -81,6 +98,10 @@ public class LaserGun : Weapon
             
             _laserGunAnimator.SetAbilityUseParameter();
             _laserGunAnimator.SetAbilityReadyParameter(false);
+
+            Stats.canAttack = false;
+            _reloadTimer.Set(_lazerGunStats.AbilityAttackReloadTime);
+            _reloadTimer.Run();
         }
         else if (Stats.AbilityReload)
         {
@@ -120,5 +141,13 @@ public class LaserGun : Weapon
                 Stats.AbilityHoldTimer = 0f;
             }
         }
+    }
+
+    protected override void OnReloadEnd()
+    {
+        _laserGunAnimator.SetAbilityUseParameter(false);
+        _laserGunAnimator.SetShotParameter(false);
+
+        Stats.canAttack = true;
     }
 }

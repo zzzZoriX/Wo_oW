@@ -1246,6 +1246,7 @@ MonoBehaviour:
   maxCoolingTime: 10
   stability: 1
   minStabilityValue: 0.3
+  canAttack: 1
   AbilityHoldTimer: 0
   AbilityReloadTimer: 0
   AbilityReload: 0
@@ -1366,7 +1367,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1600168500}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 636dba6ac1c9a534a90e785173eced68, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f2c5cc7f8074f878df3c8811fde2c03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1732321647
@@ -1468,6 +1469,7 @@ MonoBehaviour:
   maxCoolingTime: 10
   stability: 1
   minStabilityValue: 0.3
+  canAttack: 1
   AbilityHoldTimer: 0
   AbilityReloadTimer: 0
   AbilityReload: 0

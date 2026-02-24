@@ -1,8 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class WeaponAnimator : MonoBehaviour
 {
     private WeaponAnimatorParameters _parameters;
+
+    private void Start()
+    {
+        _parameters = new WeaponAnimatorParameters();
+    }
 
     public void SetShotParameter()
         => _parameters.IsShot = !_parameters.IsShot;
