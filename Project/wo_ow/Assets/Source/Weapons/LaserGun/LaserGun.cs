@@ -4,6 +4,7 @@ using UnityEngine;
 public class LaserGun : Weapon
 {
     private LaserGunStats _lazerGunStats;
+    private WeaponAnimator _laserGunAnimator;
 
 
     private void Start()
@@ -14,6 +15,8 @@ public class LaserGun : Weapon
             _lazerGunStats.HeatPerAbility,
             _lazerGunStats.HeatPerShot
         );
+
+        _laserGunAnimator = GetSpecificChildren("LaserGunTexture").GetComponent<WeaponAnimator>();
     }
 
     private void Update()
@@ -45,6 +48,8 @@ public class LaserGun : Weapon
         Temperature.Heat("Shot");
         Stability.ChangeStability(_lazerGunStats.ShotStabilityDecreaseFactor);
         Temperature.StartCoolingCooldown();
+        
+        _laserGunAnimator.SetShotParameter();
     }
 
     protected override void Ability()
@@ -73,6 +78,9 @@ public class LaserGun : Weapon
             Temperature.Heat("Ability");
             Stability.ChangeStability(_lazerGunStats.AbilityStabilityDecreaseFactor);
             Temperature.StartCoolingCooldown();
+            
+            _laserGunAnimator.SetAbilityUseParameter();
+            _laserGunAnimator.SetAbilityReadyParameter(false);
         }
         else if (Stats.AbilityReload)
         {
@@ -93,6 +101,8 @@ public class LaserGun : Weapon
             {
                 Stats.AbilityHoldTimer = _lazerGunStats.AbilityHoldTime;
                 Stats.AbilityReady = true;
+                
+                _laserGunAnimator.SetAbilityReadyParameter();
             }
             else
             {
