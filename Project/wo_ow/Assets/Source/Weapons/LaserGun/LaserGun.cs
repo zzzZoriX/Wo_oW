@@ -64,6 +64,8 @@ public class LaserGun : Weapon
         Stats.canAttack = false;
         _reloadTimer.Set(_lazerGunStats.ShotReloadTime);
         _reloadTimer.Run();
+        
+        _laserGunAnimator.SetAbilityUseParameter(false);
     }
 
     public override void Ability()
@@ -102,6 +104,8 @@ public class LaserGun : Weapon
             Stats.canAttack = false;
             _reloadTimer.Set(_lazerGunStats.AbilityAttackReloadTime);
             _reloadTimer.Run();
+            
+            _laserGunAnimator.SetShotParameter(false);
         }
         else if (Stats.AbilityReload)
         {
@@ -144,10 +148,5 @@ public class LaserGun : Weapon
     }
 
     protected override void OnReloadEnd()
-    {
-        _laserGunAnimator.SetAbilityUseParameter(false);
-        _laserGunAnimator.SetShotParameter(false);
-
-        Stats.canAttack = true;
-    }
+        => Stats.canAttack = true;
 }
