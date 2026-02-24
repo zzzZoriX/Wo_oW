@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class LaserGun : Weapon
@@ -8,7 +7,7 @@ public class LaserGun : Weapon
 
     private void Start()
     {
-        _lazerGunStats = DeserializeData.Deserialize<LaserGunStats>("./Assets/Source/Data/LazerGunData.json");
+        _lazerGunStats = DeserializeData.Deserialize<LaserGunStats>("./Assets/Source/Data/LaserGunData.json");
         Temperature.TempStats = new TemperatureStats(
             _lazerGunStats.MaxHeatValue,
             _lazerGunStats.HeatPerAbility,
@@ -26,9 +25,13 @@ public class LaserGun : Weapon
     {
         if (!Input.GetKeyDown(Stats.shootKey))
             return;
-//         TODO: add auto-z-offset defining when player rotate
+
+        var spawnPoint = GetSpecificChildren("LaserGunBulletSpawnPoint");
+        if (spawnPoint is null)
+            spawnPoint = gameObject;
+        
         var projectile = Bullet.InstanceBullet(
-            transform.position + Stats.projectilesOffset,
+            spawnPoint.transform.position,
             Stats.projectile,
             transform.rotation
         );
