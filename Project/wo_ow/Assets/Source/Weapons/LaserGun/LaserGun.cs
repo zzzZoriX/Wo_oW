@@ -55,11 +55,19 @@ public class LaserGun : Weapon
     {
         if (Stats.AbilityReady && Input.GetKeyUp(Stats.AbilityKey))
         {
-            var abilityProjectile = Instantiate(
-                Stats.abilityProjectile,
+            var spawnPoint = GetSpecificChildren("LaserGunBulletSpawnPoint");
+            if (spawnPoint is null)
+                spawnPoint = gameObject;
+        
+            var abilityProjectile = Bullet.InstanceBullet(
                 transform.position,
+                Stats.abilityProjectile,
                 transform.rotation
             );
+
+            abilityProjectile.GetComponent<Bullet>().Damage = Convert.ToSingle(Math.Round(
+                _lazerGunStats.AbilityDamage * Stats.stability, 1
+            ));
 
             abilityProjectile.GetComponent<Bullet>().Damage = _lazerGunStats.AbilityDamage;
             abilityProjectile.GetComponent<Bullet>().Shoot(
