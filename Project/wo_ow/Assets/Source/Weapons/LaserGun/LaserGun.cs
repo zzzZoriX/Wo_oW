@@ -95,7 +95,7 @@ public class LaserGun : Weapon
             }
         }
         
-        if (Input.GetKey(Stats.AbilityKey))
+        if (Input.GetKey(Stats.AbilityKey) && !Stats.AbilityReload)
         {
             if (Stats.AbilityHoldTimer >= _lazerGunStats.AbilityHoldTime)
             {
