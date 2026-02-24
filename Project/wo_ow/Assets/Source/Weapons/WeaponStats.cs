@@ -3,7 +3,6 @@ using UnityEngine;
 public class WeaponStats : MonoBehaviour
 {
     [Header("Const")]
-    public GameObject camera;
     public int destroyTime = 2;
     public KeyCode shootKey = KeyCode.Mouse0;
     public KeyCode AbilityKey = KeyCode.Mouse1;
