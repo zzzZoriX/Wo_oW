@@ -26,13 +26,9 @@ public class LaserGun : Weapon
     {
         if (!Input.GetKeyDown(Stats.shootKey))
             return;
-
-        var spawnPoint = GetSpecificChildren("LaserGunBulletSpawnPoint");
-        if (spawnPoint is null)
-            spawnPoint = gameObject;
         
         var projectile = Bullet.InstanceBullet(
-            spawnPoint.transform.position,
+            ProjectileSpawnPoint.position,
             Stats.projectile,
             transform.rotation
         );
@@ -55,12 +51,8 @@ public class LaserGun : Weapon
     {
         if (Stats.AbilityReady && Input.GetKeyUp(Stats.AbilityKey))
         {
-            var spawnPoint = GetSpecificChildren("LaserGunBulletSpawnPoint");
-            if (spawnPoint is null)
-                spawnPoint = gameObject;
-        
             var abilityProjectile = Bullet.InstanceBullet(
-                transform.position,
+                ProjectileSpawnPoint.position,
                 Stats.abilityProjectile,
                 transform.rotation
             );

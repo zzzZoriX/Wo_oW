@@ -5,6 +5,7 @@ public abstract class Weapon : MonoBehaviour
     public Temperature Temperature;
     public WeaponStats Stats;
     public WeaponStability Stability;
+    public Transform ProjectileSpawnPoint;
     
     protected virtual void Shoot()
     { }

@@ -1217,6 +1217,7 @@ MonoBehaviour:
   Temperature: {fileID: 758582797}
   Stats: {fileID: 758582795}
   Stability: {fileID: 758582796}
+  ProjectileSpawnPoint: {fileID: 0}
 --- !u!114 &758582795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1374,6 +1375,7 @@ MonoBehaviour:
   Temperature: {fileID: 1732321651}
   Stats: {fileID: 1732321652}
   Stability: {fileID: 1732321650}
+  ProjectileSpawnPoint: {fileID: 389162987}
 --- !u!114 &1732321650
 MonoBehaviour:
   m_ObjectHideFlags: 0
