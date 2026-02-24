@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class LaserGun : Weapon
@@ -36,7 +37,10 @@ public class LaserGun : Weapon
             transform.rotation
         );
 
-        projectile.GetComponent<Bullet>().Damage = _lazerGunStats.ShotDamage;
+        projectile.GetComponent<Bullet>().Damage = Convert.ToSingle(Math.Round(
+            _lazerGunStats.ShotDamage * Stats.stability, 1
+        ));
+        
         projectile.GetComponent<Bullet>().Shoot(
             Vector3.forward * _lazerGunStats.ProjectileSpeed,
             Stats.destroyTime
