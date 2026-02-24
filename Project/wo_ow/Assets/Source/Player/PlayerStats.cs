@@ -4,6 +4,9 @@ using UnityEngine.Serialization;
 
 public class PlayerStats : MonoBehaviour
 {
+    [Header("Game")] 
+    public HealthPoint HP;
+    
     [Header("Movement")]
     public float _moveSpeed;
     public float _jumpForce;

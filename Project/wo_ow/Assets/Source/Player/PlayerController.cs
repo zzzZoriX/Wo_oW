@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody _rigidbody;
     
     [Header("Stats")] 
-    [SerializeField] private PlayerStats _playerStats;
+    internal PlayerStats _playerStats;
     
     private UserData _userData;
 
@@ -30,6 +30,14 @@ public class PlayerController : MonoBehaviour
         DashRecharge();
         
         Rotate();
+    }
+
+    public void TakeADamage(float damage)
+    {
+        _playerStats.HP.Decrease(damage);
+
+        if(_playerStats.HP.HP <= 0)
+            Die();
     }
 
 //  Direction must be normalized
@@ -111,5 +119,10 @@ public class PlayerController : MonoBehaviour
             _rigidbody.AddForce(Vector3.down * _playerStats.slamForce, ForceMode.Impulse);
             _playerStats.canDoSlam = false;
         }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 }
