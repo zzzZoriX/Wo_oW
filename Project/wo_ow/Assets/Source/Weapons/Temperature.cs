@@ -14,10 +14,9 @@ public class Temperature : MonoBehaviour
     {
         _coolingTimer = gameObject.AddComponent<Timer>();
         _coolingTimer.DoWhile = true;
-        _coolingTimer.Set(_stats.maxCoolingTime);
 
         _cooldownRemaining = gameObject.AddComponent<Timer>();
-        _coolingTimer.DoWhile = false;
+        _cooldownRemaining.DoWhile = false;
     }
 
     public void Heat(string attackType)
@@ -58,8 +57,10 @@ public class Temperature : MonoBehaviour
 
         _coolingFactor = _stats.currentHeatValue / coolingTime;
 
+        _coolingTimer.Set(coolingTime);
         _coolingTimer.Action += Cooling;
         _coolingTimer.Run();
+        _cooldownRemaining.Action -= OnCoolingCooldownEnd;
     }
 
     private void Cooling()
@@ -78,6 +79,6 @@ public class Temperature : MonoBehaviour
 
     private float GetCoolingTime()
     {
-        return _stats.currentHeatValue * (_stats.maxCoolingTime / TempStats.MaxHeatValue);
+        return _stats.currentHeatValue * (_stats.maxCoolingTime / TempStats.MaxHeatValue) / 2;
     }
 }
