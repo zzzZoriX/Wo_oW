@@ -8,43 +8,43 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateHP(_player.GetComponent<PlayerController>()._playerStats.HP.HP);
+        UpdateHP(_player.GetComponent<PlayerController>()._playerStats.HP);
     }
 
-//  player
-    public void UpdateHP(float hp)
+//  playerp
+    private void UpdateHP(HealthPoint playerHP)
     {
-        _texts.HpText.text = string.Format("{0:F1} / 100", hp);
+        _texts.HpText.text = string.Format("{0:F0} / {1:F0}", playerHP.HP, playerHP.MaxHP);
     }
 
 //  game
-    public void UpdateCoolPoints(int points)
+    private void UpdateCoolPoints(int points)
     {
         _texts.CoolPointsText.text = points.ToString();
     }
 
-    public void UpdateRoundTime(string time)
+    private void UpdateRoundTime(string time)
     {
         _texts.RoundTimeRemainText.text = time;
     }
 
-    public void UpdateRoundNumberText(int roundNumber)
+    private void UpdateRoundNumberText(int roundNumber)
     {
         _texts.RoundNumberText.text = roundNumber.ToString();
     }
     
 //  weapons
-    public void UpdateLaserGunStats(float heatValue)
+    private void UpdateLaserGunStats(float heatValue)
     {
         _texts.LaserGunHeatValueText.text = heatValue.ToString();
     }
 
-    public void UpdateLaserShotgunStats(float heatValue)
+    private void UpdateLaserShotgunStats(float heatValue)
     {
         _texts.LaserShotgunHeatValueText.text = heatValue.ToString();
     }
 
-    public void UpdateLaserBladeStats(float heatValue)
+    private void UpdateLaserBladeStats(float heatValue)
     {
         _texts.LaserBladeHeatValue.text = heatValue.ToString();
     }
