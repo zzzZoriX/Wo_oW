@@ -3,6 +3,13 @@
 public class HealthPoint : MonoBehaviour
 {
     internal float HP;
+    internal float MaxHP;
+
+    public void Initialize(float maxHP)
+    {
+        MaxHP = maxHP;
+        HP = maxHP;
+    }
 
     public void Decrease(float damage)
     {
@@ -12,5 +19,14 @@ public class HealthPoint : MonoBehaviour
             HP = 0;
     }
     
-// TODO: heal hp
+    public void Heal(float healPoints)
+    {
+        HP += healPoints;
+
+        if (HP > MaxHP)
+            HP = MaxHP;
+    }
+
+    public float GetHealthPrecent()
+        => HP / MaxHP;
 }

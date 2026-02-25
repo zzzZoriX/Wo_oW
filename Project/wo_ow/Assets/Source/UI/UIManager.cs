@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
 //  player
     public void UpdateHP(float hp)
     {
-        _texts.HpText.text = hp.ToString() + " / 100";
+        _texts.HpText.text = string.Format("{0:F1} / 100", hp);
     }
 
 //  game

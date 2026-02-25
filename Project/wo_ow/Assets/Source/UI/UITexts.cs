@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class UITexts : MonoBehaviour
 {
-    public TextMeshPro HpText;
-    public TextMeshPro CoolPointsText;
-    public TextMeshPro RoundTimeRemainText;
-    public TextMeshPro RoundNumberText;
-    public TextMeshPro LaserGunHeatValueText;
+    public TextMeshProUGUI HpText;
+    public TextMeshProUGUI CoolPointsText;
+    public TextMeshProUGUI RoundTimeRemainText;
+    public TextMeshProUGUI RoundNumberText;
+    public TextMeshProUGUI LaserGunHeatValueText;
 //  TODO:
-    public TextMeshPro LaserShotgunHeatValueText;
-    public TextMeshPro LaserBladeHeatValue;
+    public TextMeshProUGUI LaserShotgunHeatValueText;
+    public TextMeshProUGUI LaserBladeHeatValue;
 }
