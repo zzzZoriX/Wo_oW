@@ -6,14 +6,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody _rigidbody;
     
     [Header("Stats")] 
-    internal PlayerStats _playerStats;
+    public PlayerStats _playerStats;
     
     private UserData _userData;
 
     private void Start()
     {
         _userData = DeserializeData.Deserialize<UserData>("./Assets/Source/Data/UserData.json");
-        _playerStats.HP.Initialize(100);
+        _playerStats.HP.Initialize(80);
     }
     
     private void Update()
