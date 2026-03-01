@@ -4,6 +4,7 @@ public class Enemy : MonoBehaviour
 {
     public EnemyControls EnemyControls;
     public EnemyStats Stats;
+    public bool IsAlive;
 
     public void TakeDamage(float damage)
     {
@@ -13,8 +14,8 @@ public class Enemy : MonoBehaviour
             Die();
     }
 
-    private void Die()
-    {
-        Destroy(gameObject);
+    private void Die() {
+        IsAlive = false;
+        gameObject.SetActive(false);
     }
 }
