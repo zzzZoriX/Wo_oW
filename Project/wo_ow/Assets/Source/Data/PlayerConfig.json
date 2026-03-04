@@ -1,3 +1,6 @@
 ﻿{
-
+  "MaxDashCount": 3,
+  "DashDistance": 5.0,
+  "DashCooldown": 1.0,
+  "SlamForce": 20.0
 }

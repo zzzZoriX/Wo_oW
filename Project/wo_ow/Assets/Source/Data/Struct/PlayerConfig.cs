@@ -1,5 +1,6 @@
-﻿namespace Source.Data.Struct {
-    public class PlayerConfig {
-        
-    }
+﻿public class PlayerConfig {
+    public int MaxDashCount;
+    public float DashDistance;
+    public float DashCooldown;
+    public float SlamForce;
 }

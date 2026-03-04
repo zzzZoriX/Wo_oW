@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerConfig {
+public class PlayerKeyConfig {
     public KeyCode JumpKC;
     public KeyCode DashKC;
     public KeyCode SlamKC;
