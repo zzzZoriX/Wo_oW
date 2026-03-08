@@ -8,7 +8,8 @@ public class AttackZone : MonoBehaviour {
     public List<GameObject> ObjectsInZone { get; private set; }
 
 
-    [CanBeNull] public GameObject FindObjectInZone(string tag)
+    [CanBeNull] 
+    public GameObject FindObjectInZone(string tag)
         => ObjectsInZone.Find(go => {
             return go.CompareTag(tag);
         });

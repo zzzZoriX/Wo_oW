@@ -23,7 +23,7 @@ public class NeonSoldier : Enemy {
         if (player is null)
             return;
         
-        
+        _weapon.Shoot();
     }
 
     private void OnTriggerEnter(Collider other)
