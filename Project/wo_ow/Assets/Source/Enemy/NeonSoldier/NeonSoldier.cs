@@ -16,9 +16,9 @@ public class NeonSoldier : Enemy
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Projectile"))
+        if (other.gameObject.CompareTag("Attack"))
         {
-            TakeDamage(other.gameObject.GetComponent<Bullet>().Damage);
+            TakeDamage(other.gameObject.GetComponent<WeaponAttack>().Damage);
             Destroy(other.gameObject);
         }
     }
