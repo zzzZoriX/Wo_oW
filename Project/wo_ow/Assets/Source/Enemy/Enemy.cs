@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-    public EnemyControls EnemyControls;
-    public EnemyStats Stats;
+    [SerializeField] protected EnemyControls enemyControls;
+    [SerializeField] protected AttackZone attackZone;
+    protected EnemySettings Settings;
 }

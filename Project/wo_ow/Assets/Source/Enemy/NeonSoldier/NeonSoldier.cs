@@ -1,17 +1,29 @@
 ﻿using System;
 using UnityEngine;
 
-public class NeonSoldier : Enemy
-{
+public class NeonSoldier : Enemy {
+    [SerializeField] private Weapon _weapon;
+    
     private void Start()
     {
-        Stats = DeserializeData.Deserialize<EnemyStats>("./Assets/Source/Data/NeonSoldierData.json");
-        Health.HP = Stats.HP;
+        Settings = DeserializeData.Deserialize<EnemySettings>("./Assets/Source/Data/NeonSoldierData.json");
+        Health.HP = Settings.HP;
     }
 
     private void Update()
     {
-        EnemyControls.MoveToTarget(Stats.MoveSpeed);
+        enemyControls.MoveToTarget(Settings.MoveSpeed);
+    }
+
+    private void Attack() {
+        if (!attackZone.SomeoneInAttackRange)
+            return;
+
+        var player = attackZone.FindObjectInZone("Player");
+        if (player is null)
+            return;
+        
+        
     }
 
     private void OnTriggerEnter(Collider other)
