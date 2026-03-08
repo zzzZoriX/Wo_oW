@@ -25,7 +25,7 @@ public class PlayerController : Entity
         
         _playerMovement.GroundSlam();
         
-        _playerMovement.Dash(direction.normalized);
+        _playerMovement.Dash(direction);
         
         Rotate();
     }

@@ -1,25 +1,24 @@
 ﻿using System;
 using UnityEngine;
 
-public class NeonSoldier : MonoBehaviour
+public class NeonSoldier : Enemy
 {
-    [SerializeField] private Enemy _enemy;
-
     private void Start()
     {
-        _enemy.Stats = DeserializeData.Deserialize<EnemyStats>("./Assets/Source/Data/NeonSoldierData.json");
+        Stats = DeserializeData.Deserialize<EnemyStats>("./Assets/Source/Data/NeonSoldierData.json");
+        Health.HP = Stats.HP;
     }
 
     private void Update()
     {
-        _enemy.EnemyControls.MoveToTarget(_enemy.Stats.MoveSpeed);
+        EnemyControls.MoveToTarget(Stats.MoveSpeed);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Projectile"))
         {
-            _enemy.TakeDamage(other.gameObject.GetComponent<Bullet>().Damage);
+            TakeDamage(other.gameObject.GetComponent<Bullet>().Damage);
             Destroy(other.gameObject);
         }
     }

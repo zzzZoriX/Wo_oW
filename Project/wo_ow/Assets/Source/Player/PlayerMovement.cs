@@ -33,9 +33,6 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    /// <param name="direction">
-    /// must be normilized
-    /// </param>
     public void Dash(Vector3 direction) {
         if (Input.GetKeyDown(_playerKeyConfig.DashKC) && _dashCounter != 0) {
             var dashDir = direction.magnitude > 0.1f ? 

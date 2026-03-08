@@ -1,9 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Entity : MonoBehaviour {
     public EntityController Controller;
     public HealthPoint Health { get; protected set; }
     public bool IsAlive { get; private set; }
+
+    private void Start() {
+        IsAlive = true;
+    }
 
     public void TakeDamage(float damage) {
         Health.Decrease(damage);
@@ -14,6 +19,6 @@ public class Entity : MonoBehaviour {
 
     private void Die() {
         gameObject.SetActive(false);
-        IsAlive = true;
+        IsAlive = false;
     }
 }
