@@ -37,23 +37,7 @@ public class LaserGun : Weapon
 
     public override void Shoot()
     {
-        if (!Input.GetKeyDown(Stats.shootKey) || !Stats.canAttack)
-            return;
-        
-        var projectile = Bullet.InstanceBullet(
-            ProjectileSpawnPoint.position,
-            Stats.projectile,
-            transform.rotation
-        );
-
-        projectile.GetComponent<Bullet>().Damage = Convert.ToSingle(Math.Round(
-            _lazerGunStats.ShotDamage * Stats.stability, 1
-        ));
-        
-        projectile.GetComponent<Bullet>().Shoot(
-            Vector3.forward * _lazerGunStats.ProjectileSpeed,
-            Stats.destroyTime
-        );
+        base.Shoot();
         
         Temperature.Heat("Shot");
         Stability.ChangeStability(_lazerGunStats.ShotStabilityDecreaseFactor);
@@ -66,7 +50,7 @@ public class LaserGun : Weapon
         _reloadTimer.Run();
     }
 
-    public override void Ability()
+    public void Ability()
     {
         if (!Stats.canAttack)
             return;
@@ -80,12 +64,12 @@ public class LaserGun : Weapon
             );
 
             abilityProjectile.GetComponent<Bullet>().Damage = Convert.ToSingle(Math.Round(
-                _lazerGunStats.AbilityDamage * Stats.stability, 1
+                Stats.AbilityDamage * Stats.stability, 1
             ));
 
-            abilityProjectile.GetComponent<Bullet>().Damage = _lazerGunStats.AbilityDamage;
+            abilityProjectile.GetComponent<Bullet>().Damage = Stats.AbilityDamage;
             abilityProjectile.GetComponent<Bullet>().Shoot(
-                Vector3.forward * _lazerGunStats.ProjectileSpeed,
+                Vector3.forward * Stats.ProjectileSpeed,
                 Stats.AbilityProjectileLifeTime
             );
 
