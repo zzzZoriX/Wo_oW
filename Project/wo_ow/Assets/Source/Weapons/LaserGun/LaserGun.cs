@@ -31,13 +31,29 @@ public class LaserGun : Weapon
 
     private void Update()
     {
-        Shoot();
+        Attack();
         Ability();
     }
 
-    public override void Shoot()
+    public override void Attack()
     {
-        base.Shoot();
+        if (!Input.GetKeyDown(Stats.shootKey) || !Stats.canAttack)
+            return;
+        
+        var projectile = Bullet.InstanceBullet(
+            ProjectileSpawnPoint.position,
+            Stats.projectile,
+            transform.rotation
+        );
+
+        projectile.GetComponent<Bullet>().Damage = Convert.ToSingle(Math.Round(
+            Stats.ShotDamage * Stats.stability, 1
+        ));
+        
+        projectile.GetComponent<Bullet>().Shoot(
+            Vector3.forward * Stats.ProjectileSpeed,
+            Stats.destroyTime
+        );
         
         Temperature.Heat("Shot");
         Stability.ChangeStability(_lazerGunStats.ShotStabilityDecreaseFactor);
