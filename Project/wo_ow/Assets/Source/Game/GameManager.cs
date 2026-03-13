@@ -1,64 +1,62 @@
 ﻿using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour {
-    [SerializeField] private RoundManager _roundManager;
-    [SerializeField] private GameStats _stats;
-    private RoundStats[] _currentRoundsStats;
-    private uint _currentRoundIndex;
+    [SerializeField] private Spawner spawner;
+    [SerializeField] private RoundManager roundManager;
 
-    private Enemies[] _enemies = {
-        Enemies.NeonSoldier, Enemies.EyeOfGod, Enemies.Glitch
-    };
+    private void InitializeComponents() {
+        roundManager.Construct(spawner);
+    }
+    
+    [SerializeField] private GameObject player;
+    private CompleteStatus _gameStatus;
+    private GameConfig _config;
+    private GameStats _stats;
 
 
     private void Start() {
-        _roundManager.OnRoundEnd += RoundController;
+        _config = DeserializeData.Deserialize<GameConfig>("./Assets/Source/Data/GameConfig.json");
+        
+        InitializeComponents();
+        roundManager.OnRoundEnd += ProcessGame;
+
+        _stats.EnemyPerRound = _config.DefaultEnemyPerRoundCount;
     }
 
     private void OnDisable() {
-        _roundManager.OnRoundEnd -= RoundController;
+        roundManager.OnRoundEnd -= ProcessGame;
     }
-
-    public void StartRounds() {
-        _currentRoundsStats = GenerateRounds();
-        _currentRoundIndex = 0;
+    
+    public void StartGame() {
+        roundManager.RoundNumber = 0;
         
-        RoundController();
+        _gameStatus = CompleteStatus.NotComplete;
+        
+        ProcessGame();
     }
 
-    private void RoundController() {
-        if (_currentRoundIndex == _stats.RoundCount) {
-            OnRoundsEnd();
+    private void ProcessGame() {
+        if (_gameStatus == CompleteStatus.Complete)
+            return;
+
+        if (roundManager.RoundNumber == _config.RoundCount) {
+            _gameStatus = CompleteStatus.Complete;
+            
+            EndGame();
 
             return;
         }
-
-        _roundManager.StartRound(_currentRoundsStats[_currentRoundIndex++]);
+        
+        roundManager.StartRound(_stats.EnemyPerRound);
+        
+        _stats.IncreaseEnemiesOnRound(_config.EPRIncreaseFactor);
     }
 
-    private void OnRoundsEnd() {
-        Debug.Log("Rounds End");
-    }
-
-    private RoundStats[] GenerateRounds() {
-        var stats = new RoundStats[_stats.RoundCount];
-        for (uint number = 1; number <= 5; ++number) {
-            stats[number - 1] = new RoundStats(number, _stats.RoundTime, 2, 5 + number); // в будущем заменю на авто-определение кол-ва волн
-            stats[number - 1].EnemyOnRound = GenerateEnemies(10 + number * 2);
-        }
-
-        return stats;
-    }
-
-    private Enemies[] GenerateEnemies(uint count) {
-        var enemiesPack = new Enemies[count];
-
-        for (uint index = 0; index < count; ++index) {
-            enemiesPack[index] = _enemies[Random.Range(0, _enemies.Length)];
-        }
-
-        return enemiesPack;
+    /// <summary>
+    /// invoke when player complete all rounds and teleport him to the lobby
+    /// </summary>
+    private void EndGame() {
+        player.transform.position = new Vector3(); // <- set value to the lobby coordinates
     }
 }

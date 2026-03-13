@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿public class GameStats {
+    public int EnemyPerRound;
 
-public class GameStats : MonoBehaviour {
-    public float RoundTime;
-    public uint RoundCount;
+    public void IncreaseEnemiesOnRound(int EPRIncreaseValue)
+        => EnemyPerRound += EPRIncreaseValue; 
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SpawnerInfo : MonoBehaviour {
+public class SpawnerConfig : MonoBehaviour {
     public GameObject NeonSoldierPrefab;
     public GameObject EyeOfGodPrefab;
     public GameObject GlitchPrefab;
