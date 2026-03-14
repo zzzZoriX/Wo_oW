@@ -8,21 +8,13 @@ public class RoundManager : MonoBehaviour {
     public int RoundNumber;
     public int RoundTime; // in seconds
 
-    private WaveManager _waveManager;
+    [SerializeField] private WaveManager _waveManager;
     private RoundConfig _currentRoundConfig;
     private CompleteStatus _status;
 
     private readonly Enemies[] _enemiesArray = {
         Enemies.EyeOfGod, Enemies.Glitch, Enemies.NeonSoldier
     };
-
-
-    public void Construct(Spawner spawner) {
-        _waveManager.Construct(spawner);
-        _waveManager.OnWaveEnd += RoundProcess;
-
-        RoundNumber = 0;
-    }
 
     public void StartRound(int enemyPerRound) {
         _currentRoundConfig = new RoundConfig(++RoundNumber, RoundTime, enemyPerRound, GenerateEnemies(enemyPerRound));

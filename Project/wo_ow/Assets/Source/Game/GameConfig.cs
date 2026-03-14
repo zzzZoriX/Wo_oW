@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class GameConfig : MonoBehaviour {
-    public float RoundTime;
+public class GameConfig {
+    public int RoundTime;
     public int RoundCount;
     public int DefaultEnemyPerRoundCount;
-    public int EPRIncreaseFactor;
+    public int EPRIncreaseValue;
 }

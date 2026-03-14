@@ -5,17 +5,16 @@ public class WaveManager : MonoBehaviour {
     public event Action OnWaveEnd;
     public int WaveNumber;
 
-    private Spawner _spawner;
+    [SerializeField] private Spawner _spawner;
     private WaveStats _currentWaveStats;
+
+
+    private void Start() {
+        _currentWaveStats = new WaveStats();
+    }
 
     private void Update() {
         CheckWaveStatus();
-    }
-
-    public void Construct(Spawner spawner) {
-        _spawner = spawner;
-        _currentWaveStats = new WaveStats();
-        WaveNumber = 0;
     }
 
     public void GenerateWave(WaveConfig config) {

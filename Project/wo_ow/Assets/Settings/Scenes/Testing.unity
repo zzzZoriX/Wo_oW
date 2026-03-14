@@ -1339,6 +1339,7 @@ Transform:
   - {fileID: 572669840}
   - {fileID: 1086976956}
   - {fileID: 552274667}
+  - {fileID: 1714025717}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &552274666
@@ -1355,7 +1356,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1449,7 +1450,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60501413ee3f441fb94d7d6010d903b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawner: {fileID: 552274669}
   roundManager: {fileID: 1086976957}
   player: {fileID: 199370565}
 --- !u!1 &676073769
@@ -2105,6 +2105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RoundNumber: 0
   RoundTime: 0
+  _waveManager: {fileID: 1714025718}
 --- !u!1 &1326724360
 GameObject:
   m_ObjectHideFlags: 0
@@ -2350,6 +2351,52 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1714025716
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1714025717}
+  - component: {fileID: 1714025718}
+  m_Layer: 0
+  m_Name: WaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1714025717
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714025716}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 536311885}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1714025718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714025716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f52b183e82745b5b6bdc33b5a1aa6f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WaveNumber: 0
+  _spawner: {fileID: 552274669}
 --- !u!1 &1732321647
 GameObject:
   m_ObjectHideFlags: 0

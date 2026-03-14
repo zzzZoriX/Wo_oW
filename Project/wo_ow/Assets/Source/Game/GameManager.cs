@@ -2,13 +2,7 @@
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
-    [SerializeField] private Spawner spawner;
     [SerializeField] private RoundManager roundManager;
-
-    private void InitializeComponents() {
-        roundManager.Construct(spawner);
-    }
-    
     [SerializeField] private GameObject player;
     private CompleteStatus _gameStatus;
     private GameConfig _config;
@@ -16,9 +10,10 @@ public class GameManager : MonoBehaviour {
 
 
     private void Start() {
+        _stats = new GameStats();
+        
         _config = DeserializeData.Deserialize<GameConfig>("./Assets/Source/Data/GameConfig.json");
         
-        InitializeComponents();
         roundManager.OnRoundEnd += ProcessGame;
 
         _stats.EnemyPerRound = _config.DefaultEnemyPerRoundCount;
@@ -50,7 +45,7 @@ public class GameManager : MonoBehaviour {
         
         roundManager.StartRound(_stats.EnemyPerRound);
         
-        _stats.IncreaseEnemiesOnRound(_config.EPRIncreaseFactor);
+        _stats.IncreaseEnemiesOnRound(_config.EPRIncreaseValue);
     }
 
     /// <summary>
