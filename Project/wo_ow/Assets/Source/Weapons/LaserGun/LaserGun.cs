@@ -4,7 +4,6 @@ using UnityEngine;
 public class LaserGun : Weapon
 {
     private LaserGunStats _lazerGunStats;
-    private WeaponAnimator _laserGunAnimator;
     private Timer _reloadTimer;
 
 
@@ -20,8 +19,6 @@ public class LaserGun : Weapon
             _lazerGunStats.HeatPerAbility,
             _lazerGunStats.HeatPerShot
         );
-
-        _laserGunAnimator = GetSpecificChildren("LaserGunTexture").GetComponent<WeaponAnimator>();
     }
 
     private void OnDestroy()
@@ -31,123 +28,115 @@ public class LaserGun : Weapon
 
     private void Update()
     {
-        Attack();
+        Shot();
         Ability();
     }
 
     public override void Attack()
     {
-        if (!Input.GetKeyDown(Stats.shootKey) || !Stats.canAttack)
-            return;
-        
         var projectile = Bullet.InstanceBullet(
-            ProjectileSpawnPoint.position,
-            Stats.projectile,
+            projectileSpawnPoint.position,
+            stats.projectile,
             transform.rotation
         );
 
         projectile.GetComponent<Bullet>().Damage = Convert.ToSingle(Math.Round(
-            Stats.ShotDamage * Stats.stability, 1
+            stats.ShotDamage * stats.stability, 1
         ));
         
         projectile.GetComponent<Bullet>().Shoot(
-            Vector3.forward * Stats.ProjectileSpeed,
-            Stats.destroyTime
+            Vector3.forward * stats.ProjectileSpeed,
+            stats.destroyTime
         );
         
         Temperature.Heat("Shot");
         Stability.ChangeStability(_lazerGunStats.ShotStabilityDecreaseFactor);
         Temperature.StartCoolingCooldown();
         
-        _laserGunAnimator.SetShotParameter();
 
-        Stats.canAttack = false;
+        stats.canAttack = false;
         _reloadTimer.Set(_lazerGunStats.ShotReloadTime);
         _reloadTimer.Run();
     }
 
     public void Ability()
     {
-        if (!Stats.canAttack)
-            return;
-        
-        if (Stats.AbilityReady && Input.GetKeyUp(Stats.AbilityKey))
+        if (stats.AbilityReady && Input.GetKeyUp(stats.AbilityKey))
         {
+            WeaponAnimator.SetAbilityReady(false);
+            
             var abilityProjectile = Bullet.InstanceBullet(
-                ProjectileSpawnPoint.position,
-                Stats.abilityProjectile,
+                projectileSpawnPoint.position,
+                stats.abilityProjectile,
                 transform.rotation
             );
 
             abilityProjectile.GetComponent<Bullet>().Damage = Convert.ToSingle(Math.Round(
-                Stats.AbilityDamage * Stats.stability, 1
+                stats.AbilityDamage * stats.stability, 1
             ));
 
-            abilityProjectile.GetComponent<Bullet>().Damage = Stats.AbilityDamage;
+            abilityProjectile.GetComponent<Bullet>().Damage = stats.AbilityDamage;
             abilityProjectile.GetComponent<Bullet>().Shoot(
-                Vector3.forward * Stats.ProjectileSpeed,
-                Stats.AbilityProjectileLifeTime
+                Vector3.forward * stats.ProjectileSpeed,
+                stats.AbilityProjectileLifeTime
             );
 
-            Stats.AbilityReady = false;
-            Stats.AbilityReload = true;
+            stats.AbilityReady = false;
+            stats.AbilityReload = true;
             
             Temperature.Heat("Ability");
             Stability.ChangeStability(_lazerGunStats.AbilityStabilityDecreaseFactor);
             Temperature.StartCoolingCooldown();
             
-            _laserGunAnimator.SetAbilityUseParameter();
-            _laserGunAnimator.SetAbilityReadyParameter(false);
 
-            Stats.canAttack = false;
+            stats.canAttack = false;
             _reloadTimer.Set(_lazerGunStats.AbilityAttackReloadTime);
             _reloadTimer.Run();
         }
-        else if (Stats.AbilityReload)
+        else if (stats.AbilityReload)
         {
-            if (Stats.AbilityReloadTimer >= _lazerGunStats.AbilityReloadTime)
+            if (stats.AbilityReloadTimer >= _lazerGunStats.AbilityReloadTime)
             {
-                Stats.AbilityReloadTimer = 0f;
-                Stats.AbilityReload = false;
+                stats.AbilityReloadTimer = 0f;
+                stats.AbilityReload = false;
             }
             else
             {
-                Stats.AbilityReloadTimer += Time.deltaTime;
+                stats.AbilityReloadTimer += Time.deltaTime;
             }
         }
         
-        if (Input.GetKey(Stats.AbilityKey) && !Stats.AbilityReload)
+        if (Input.GetKey(stats.AbilityKey) && !stats.AbilityReload)
         {
-            if (Stats.AbilityHoldTimer >= _lazerGunStats.AbilityHoldTime)
+            if (stats.AbilityHoldTimer >= _lazerGunStats.AbilityHoldTime)
             {
-                Stats.AbilityHoldTimer = _lazerGunStats.AbilityHoldTime;
-                Stats.AbilityReady = true;
+                stats.AbilityHoldTimer = _lazerGunStats.AbilityHoldTime;
+                stats.AbilityReady = true;
                 
-                _laserGunAnimator.SetAbilityReadyParameter();
+                WeaponAnimator.SetAbilityReady(true);
             }
             else
             {
-                Stats.AbilityHoldTimer += Time.deltaTime;
+                stats.AbilityHoldTimer += Time.deltaTime;
             }
         }
         else
         {
-            if (Stats.AbilityHoldTimer > 0)
+            if (stats.AbilityHoldTimer > 0)
             {
-                Stats.AbilityHoldTimer -= Time.deltaTime;
+                stats.AbilityHoldTimer -= Time.deltaTime;
             }
             else
             {
-                Stats.AbilityHoldTimer = 0f;
+                stats.AbilityHoldTimer = 0f;
             }
         }
     }
 
-    protected override void OnReloadEnd()
-    {
-        _laserGunAnimator.SetShotParameter(false);
-        _laserGunAnimator.SetAbilityUseParameter(false);
-
-        Stats.canAttack = true;
+    private void Shot() {
+        if (!Input.GetKeyDown(stats.shootKey))
+            return;
+        
+        WeaponAnimator.SetShotTrigger();
     }
 }

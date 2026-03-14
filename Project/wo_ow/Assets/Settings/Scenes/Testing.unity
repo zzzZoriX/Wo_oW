@@ -1812,9 +1812,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Temperature: {fileID: 758582797}
-  Stats: {fileID: 758582795}
   Stability: {fileID: 758582796}
-  ProjectileSpawnPoint: {fileID: 0}
+  WeaponAnimator: {fileID: 0}
+  projectileSpawnPoint: {fileID: 0}
+  stats: {fileID: 0}
 --- !u!114 &758582795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2247,7 +2248,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f2c5cc7f8074f878df3c8811fde2c03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 1600168501}
+  animator: {fileID: 1600168501}
+  weapon: {fileID: 1732321649}
 --- !u!1 &1708504239
 GameObject:
   m_ObjectHideFlags: 0
@@ -2447,9 +2449,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Temperature: {fileID: 1732321651}
-  Stats: {fileID: 1732321652}
   Stability: {fileID: 1732321650}
-  ProjectileSpawnPoint: {fileID: 389162987}
+  WeaponAnimator: {fileID: 1600168502}
+  projectileSpawnPoint: {fileID: 389162987}
+  stats: {fileID: 1732321652}
 --- !u!114 &1732321650
 MonoBehaviour:
   m_ObjectHideFlags: 0
