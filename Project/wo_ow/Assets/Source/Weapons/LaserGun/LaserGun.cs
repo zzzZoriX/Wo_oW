@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class LaserGun : Weapon
+public class LaserGun : PlayerWeapon
 {
     private LaserGunStats _lazerGunStats;
     private Timer _reloadTimer;

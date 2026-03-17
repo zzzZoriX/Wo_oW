@@ -11,13 +11,14 @@ public class WaveManager : MonoBehaviour {
 
     private void Start() {
         _currentWaveStats = new WaveStats();
+        _currentWaveStats.WaveCompleteStatus = CompleteStatus.Complete;
     }
 
     private void Update() {
         CheckWaveStatus();
     }
 
-    public void GenerateWave(WaveConfig config) {
+    public void StartWave(WaveConfig config) {
         _currentWaveStats.AliveEnemiesCount = config.CountEnemiesOnWave;
         _currentWaveStats.AliveEnemiesList = _spawner.Spawn(config.EnemiesOnWave);
         _currentWaveStats.WaveCompleteStatus = CompleteStatus.NotComplete;
@@ -40,11 +41,7 @@ public class WaveManager : MonoBehaviour {
     }
 
     private void CheckEachEnemyThatItsAlive() {
-        foreach (var enemy in _currentWaveStats.AliveEnemiesList) {
-            if (!enemy.IsAlive) {
-                --_currentWaveStats.AliveEnemiesCount;
-                _currentWaveStats.AliveEnemiesList.Remove(enemy);
-            }
-        }
+        var removeCount = _currentWaveStats.AliveEnemiesList.RemoveAll(enemy => !enemy.IsAlive);
+        _currentWaveStats.AliveEnemiesCount -= removeCount;
     }
 }

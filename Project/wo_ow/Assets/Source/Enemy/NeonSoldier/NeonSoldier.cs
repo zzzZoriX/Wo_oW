@@ -5,7 +5,7 @@ public class NeonSoldier : Enemy {
     private void Start()
     {
         Settings = DeserializeData.Deserialize<EnemySettings>("./Assets/Source/Data/NeonSoldierData.json");
-        Health.HP = Settings.HP;
+        Health.Initialize(Settings.HP);
     }
 
     private void Update()

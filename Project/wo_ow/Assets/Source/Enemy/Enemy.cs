@@ -7,6 +7,7 @@ public class Enemy : Entity
     [SerializeField] private Weapon _weapon;
     protected EnemySettings Settings;
 
+
     private void Update() {
         Attack();
     }
@@ -24,7 +25,7 @@ public class Enemy : Entity
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Attack"))
+        if (other.gameObject.CompareTag("Projectile"))
         {
             TakeDamage(other.gameObject.GetComponent<WeaponAttack>().Damage);
             Destroy(other.gameObject);

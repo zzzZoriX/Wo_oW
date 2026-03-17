@@ -1,0 +1,42 @@
+﻿using System;
+using UnityEngine;
+
+public class NSLaserGun : Weapon {
+    private NeonSoldierWeaponConfig _weaponConfig;
+    private Timer _reloadTimer;
+
+
+    private void Start() {
+        _reloadTimer = gameObject.AddComponent<Timer>();
+
+        _reloadTimer.DoWhile = false;
+        _reloadTimer.Action += SetAttackStatus;
+
+        _weaponConfig = DeserializeData.Deserialize<NeonSoldierWeaponConfig>("./Assets/Source/Data/NeonSoldierWeaponConfig.json");
+    }
+
+    private void OnDisable() {
+        _reloadTimer.Action -= SetAttackStatus;
+    }
+
+    private void SetAttackStatus() {
+        stats.canAttack = !stats.canAttack;
+    }
+
+    public override void Attack() {
+        var projectile = Bullet.InstanceBullet(
+            projectileSpawnPoint.position,
+            stats.projectile,
+            transform.rotation
+        );
+
+        projectile.GetComponent<Bullet>().Damage = _weaponConfig.Damage;
+        projectile.GetComponent<Bullet>().Shoot(
+            Vector3.forward * stats.ProjectileSpeed,
+            stats.destroyTime
+        );
+
+        SetAttackStatus();
+        _reloadTimer.SetNRun(_weaponConfig.AttackSpeed);
+    }
+}

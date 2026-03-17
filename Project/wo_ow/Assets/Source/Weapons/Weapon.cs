@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public Temperature Temperature;
-    public WeaponStability Stability;
     public WeaponAnimator WeaponAnimator;
     [SerializeField] protected Transform projectileSpawnPoint;
     [SerializeField] protected WeaponStats stats;

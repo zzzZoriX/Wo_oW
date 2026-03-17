@@ -2,7 +2,11 @@
 
 public class EnemyControls : MonoBehaviour
 {
-    [SerializeField] private Transform _target;
+    private Transform _target;
+
+    private void Start() {
+        _target = GameObject.Find("PlayerBase").transform;
+    }
 
     public void MoveToTarget(float speed)
     {

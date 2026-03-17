@@ -38,7 +38,7 @@ public class RoundManager : MonoBehaviour {
             return;
         }
 
-        _waveManager.GenerateWave(
+        _waveManager.StartWave(
             new WaveConfig(
                 _currentRoundConfig.EnemyOnWaves[_waveManager.WaveNumber],
                 _currentRoundConfig.EnemyPerWave
@@ -47,10 +47,11 @@ public class RoundManager : MonoBehaviour {
     }
 
     private List<Enemies> GenerateEnemies(int count) {
-        var enemies = new List<Enemies>(count);
-        
+        var enemies = new List<Enemies>();
+
         for (var i = 0; i < count; ++i)
-            enemies[i] = _enemiesArray[Random.Range(0, 2)];
+            // enemies[i] = _enemiesArray[Random.Range(0, 2)];
+            enemies.Add(_enemiesArray[2]);
 
         return enemies;
     }

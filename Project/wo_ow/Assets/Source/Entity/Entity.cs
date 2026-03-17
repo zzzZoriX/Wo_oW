@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour {
     public EntityController Controller;
-    public HealthPoint Health { get; protected set; }
+    public HealthPoint Health; 
     public bool IsAlive { get; private set; }
 
     private void Start() {
