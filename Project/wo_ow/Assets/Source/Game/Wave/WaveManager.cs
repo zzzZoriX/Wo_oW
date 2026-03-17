@@ -41,7 +41,11 @@ public class WaveManager : MonoBehaviour {
     }
 
     private void CheckEachEnemyThatItsAlive() {
-        var removeCount = _currentWaveStats.AliveEnemiesList.RemoveAll(enemy => !enemy.IsAlive);
-        _currentWaveStats.AliveEnemiesCount -= removeCount;
+        for(var i = 0; i < _currentWaveStats.AliveEnemiesList.Count; ++i) {
+            if (!_currentWaveStats.AliveEnemiesList[i].IsAlive) {
+                --_currentWaveStats.AliveEnemiesCount;
+                _currentWaveStats.AliveEnemiesList.RemoveAt(i);
+            }
+        }
     }
 }

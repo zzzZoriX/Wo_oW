@@ -6,8 +6,10 @@ public class Entity : MonoBehaviour {
     public HealthPoint Health; 
     public bool IsAlive { get; private set; }
 
-    private void Start() {
+
+    private void Awake() {
         IsAlive = true;
+        Debug.Log(IsAlive);
     }
 
     public void TakeDamage(float damage) {
