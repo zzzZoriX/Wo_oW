@@ -2,17 +2,17 @@
 
 public class EnemyControls : MonoBehaviour
 {
-    private Transform _target;
+    protected Transform target;
 
     private void Start() {
-        _target = GameObject.Find("PlayerBase").transform;
+        target = GameObject.Find("PlayerBase").transform;
     }
 
-    public void MoveToTarget(float speed)
+    public virtual void MoveToTarget(float speed)
     {
         transform.position = Vector3.MoveTowards(
             transform.position,
-            _target.position,
+            target.position,
             speed * Time.deltaTime
         );
     }
@@ -21,20 +21,11 @@ public class EnemyControls : MonoBehaviour
         transform.position = Vector3.MoveTowards(
             transform.position,
             new Vector3(
-                _target.position.x,
+                target.position.x,
                 0,
-                _target.position.z
+                target.position.z
             ),
             speed * Time.deltaTime
         );
-    }
-
-//  TODO:
-    public void TeleportBehindTarget() {
-        
-    }
-
-    public void TeleportInFrontOfTarget() {
-        
     }
 }

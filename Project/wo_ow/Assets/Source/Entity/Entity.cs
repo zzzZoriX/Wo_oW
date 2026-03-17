@@ -9,7 +9,6 @@ public class Entity : MonoBehaviour {
 
     private void Awake() {
         IsAlive = true;
-        Debug.Log(IsAlive);
     }
 
     public void TakeDamage(float damage) {
