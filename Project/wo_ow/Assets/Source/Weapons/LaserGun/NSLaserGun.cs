@@ -24,6 +24,9 @@ public class NSLaserGun : Weapon {
     }
 
     public override void Attack() {
+        if (!stats.canAttack)
+            return;
+        
         var projectile = Bullet.InstanceBullet(
             projectileSpawnPoint.position,
             stats.projectile,
