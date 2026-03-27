@@ -9,7 +9,11 @@ public class NeonSoldier : Enemy {
     }
 
     private void Update()
-    {
+        => UpdateActions();
+
+    protected override void UpdateActions() {
+        base.UpdateActions();
+        
         enemyControls.MoveToTarget(Settings.MoveSpeed);
     }
 }

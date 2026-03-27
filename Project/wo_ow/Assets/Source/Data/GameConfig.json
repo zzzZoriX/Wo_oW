@@ -1,6 +1,6 @@
 ﻿{
   "RoundTime": 120,
   "RoundCount": 5,
-  "DefaultEnemyPerRoundCount": 10,
+  "DefaultEnemyPerRoundCount": 1,
   "EPRIncreaseValue": 4
 }

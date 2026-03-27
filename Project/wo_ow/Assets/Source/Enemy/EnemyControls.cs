@@ -1,31 +1,39 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class EnemyControls : MonoBehaviour
 {
-    protected Transform target;
+    protected GameObject target;
+
+    [SerializeField] private float rotateSpeed;
+
 
     private void Start() {
-        target = GameObject.Find("PlayerBase").transform;
+        target = GameObject.FindGameObjectWithTag("Player");
     }
 
     public virtual void MoveToTarget(float speed)
     {
         transform.position = Vector3.MoveTowards(
             transform.position,
-            target.position,
+            target.transform.position,
             speed * Time.deltaTime
         );
     }
 
-    public void MoveAwayFromTarget(float speed) {
+    public virtual void MoveAwayFromTarget(float speed) {
         transform.position = Vector3.MoveTowards(
             transform.position,
             new Vector3(
-                target.position.x,
+                target.transform.position.x,
                 0,
-                target.position.z
+                target.transform.position.z
             ),
             speed * Time.deltaTime
         );
     }
+
+    public virtual void RotateToTarget()
+        => transform.rotation =
+            Quaternion.RotateTowards(transform.rotation, target.transform.rotation, rotateSpeed * Time.deltaTime);
 }

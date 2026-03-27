@@ -8,8 +8,12 @@ public class Enemy : Entity
     protected EnemySettings Settings;
 
 
-    private void Update() {
+    private void Update()
+        => UpdateActions();
+
+    protected virtual void UpdateActions() {
         Attack();
+        enemyControls.RotateToTarget();
     }
 
     private void Attack() {
