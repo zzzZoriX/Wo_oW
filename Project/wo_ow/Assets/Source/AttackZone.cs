@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -20,9 +21,7 @@ public class AttackZone : MonoBehaviour {
 
     [CanBeNull]
     public bool TagInAttackZone(string tag)
-        => ObjectsInZone.Find(go => {
-            return go.CompareTag(tag);
-        });
+        => ObjectsInZone.Any(go => go.CompareTag(tag));
 
     private void OnTriggerEnter(Collider other) {
         if (!SomeoneInAttackRange)
