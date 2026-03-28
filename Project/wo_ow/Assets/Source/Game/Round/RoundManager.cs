@@ -16,6 +16,15 @@ public class RoundManager : MonoBehaviour {
         Enemies.EyeOfGod, Enemies.Glitch, Enemies.NeonSoldier
     };
 
+
+    private void Start() {
+        _waveManager.OnWaveEnd += RoundProcess;
+    }
+
+    private void OnDisable() {
+        _waveManager.OnWaveEnd -= RoundProcess;
+    }
+
     public void StartRound(int enemyPerRound) {
         _currentRoundConfig = new RoundConfig(++RoundNumber, RoundTime, enemyPerRound, GenerateEnemies(enemyPerRound));
         _currentRoundConfig.EnemyOnWaves = _currentRoundConfig.SplitEnemies();
