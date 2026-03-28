@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Enemy : Entity
@@ -7,6 +8,10 @@ public class Enemy : Entity
     [SerializeField] private Weapon _weapon;
     protected EnemySettings Settings;
 
+
+    private void Start() {
+        enemyControls.RotateToTarget();
+    }
 
     private void Update()
         => UpdateActions();
