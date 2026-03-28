@@ -19,9 +19,14 @@ public class AttackZone : MonoBehaviour {
             return go.CompareTag(tag);
         });
 
-    [CanBeNull]
-    public bool TagInAttackZone(string tag)
-        => ObjectsInZone.Any(go => go.CompareTag(tag));
+    public bool TagInAttackZone(string tag) {
+        foreach (var go in ObjectsInZone) {
+            if (go != null && go.CompareTag(tag))
+                return true;
+        }
+
+        return false;
+    }
 
     private void OnTriggerEnter(Collider other) {
         if (!SomeoneInAttackRange)

@@ -12,7 +12,7 @@ public class Enemy : Entity
         => UpdateActions();
 
     protected virtual void UpdateActions() {
-        Attack();
+        // Attack();
         enemyControls.RotateToTarget();
     }
 
