@@ -20,8 +20,7 @@ public class Enemy : Entity
         if (!attackZone.SomeoneInAttackRange)
             return;
 
-        var player = attackZone.FindObjectInZone("Player");
-        if (player is null)
+        if(attackZone.TagInAttackZone("Player"))
             return;
         
         _weapon.Attack();
