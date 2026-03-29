@@ -37,13 +37,13 @@ public class GameManager : MonoBehaviour {
 
         if (roundManager.RoundNumber == _config.RoundCount) {
             _gameStatus = CompleteStatus.Complete;
-            
+
             EndGame();
 
             return;
         }
-        
-        roundManager.StartRound(_stats.EnemyPerRound);
+
+        roundManager.StartRound(_stats.EnemyPerRound, _stats.EnemyPerRound / _config.SplitFactor);
         
         _stats.IncreaseEnemiesOnRound(_config.EPRIncreaseValue);
     }

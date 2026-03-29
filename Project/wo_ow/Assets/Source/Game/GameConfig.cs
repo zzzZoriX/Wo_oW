@@ -5,4 +5,5 @@ public class GameConfig {
     public int RoundCount;
     public int DefaultEnemyPerRoundCount;
     public int EPRIncreaseValue;
+    public int SplitFactor;
 }

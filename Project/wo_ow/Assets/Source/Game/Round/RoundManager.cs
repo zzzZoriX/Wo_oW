@@ -25,8 +25,8 @@ public class RoundManager : MonoBehaviour {
         _waveManager.OnWaveEnd -= RoundProcess;
     }
 
-    public void StartRound(int enemyPerRound) {
-        _currentRoundConfig = new RoundConfig(++RoundNumber, RoundTime, enemyPerRound, GenerateEnemies(enemyPerRound));
+    public void StartRound(int enemyPerRound, int enemyPerWave) {
+        _currentRoundConfig = new RoundConfig(++RoundNumber, RoundTime, enemyPerWave, GenerateEnemies(enemyPerRound));
         _currentRoundConfig.EnemyOnWaves = _currentRoundConfig.SplitEnemies();
 
         _status = CompleteStatus.NotComplete;
