@@ -7,7 +7,9 @@ public class CameraRotator : MonoBehaviour
     private float _rotationX = 0f;
 
     private void Start() {
-        // Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        
         _userData = DeserializeData.Deserialize<UserData>("Jsons/UserData");
     }
 

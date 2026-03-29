@@ -11,6 +11,12 @@ public class GameManager : MonoBehaviour {
 
     public GameStats GetGameStats()
         => new(roundManager.RoundNumber, roundManager.WaveManager.WaveNumber);
+
+    public void FreezeGame()
+        => Time.timeScale = 0;
+
+    public void ResumeGame()
+        => Time.timeScale = 1;
     
     private void Start() {
         _epr = new EPR();
