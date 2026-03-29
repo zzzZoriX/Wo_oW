@@ -3,9 +3,8 @@ using UnityEngine;
 
 public class DeserializeData
 {
-    public static T Deserialize<T>(string path)
-    {
-        var jsonUserData = File.ReadAllText(path);
-        return JsonUtility.FromJson<T>(jsonUserData);
+    public static T Deserialize<T>(string fileName) {
+        var jsonText = Resources.Load<TextAsset>(fileName);
+        return JsonUtility.FromJson<T>(jsonText.text);
     }
 }
