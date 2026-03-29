@@ -11,8 +11,6 @@ public class UIManager : MonoBehaviour
     {
         UpdateHP(_player._playerStats.HP);
         
-        if(_gameManager is null)
-            Debug.Log("Game manager is null");
         UpdateWaveNumberText(_gameManager.GetGameStats().WaveNumber);
         UpdateRoundNumberText(_gameManager.GetGameStats().RoundNumber);
     }
