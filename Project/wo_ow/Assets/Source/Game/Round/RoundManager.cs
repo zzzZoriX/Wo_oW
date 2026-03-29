@@ -46,8 +46,8 @@ public class RoundManager : MonoBehaviour {
             
             return;
         }
-
-        _waveManager.StartWave(
+        
+        _waveManager.StartWave( 
             new WaveConfig(
                 _currentRoundConfig.EnemyOnWaves[_waveManager.WaveNumber],
                 _currentRoundConfig.EnemyPerWave

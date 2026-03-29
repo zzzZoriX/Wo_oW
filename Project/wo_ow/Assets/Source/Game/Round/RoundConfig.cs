@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 public class RoundConfig {
     public int RoundNumber; // номер раунда
@@ -17,18 +18,11 @@ public class RoundConfig {
     }
     
     public List<List<Enemies>> SplitEnemies() {
-        var enemiesOnWave = new List<List<Enemies>>();
-
-        for (var i = 0; i < EnemyOnRound.Count; ++i) {
-            var enemyOnWave = new List<Enemies>();
-            
-            for (var j = 0; j < EnemyPerWave; ++j)
-                enemyOnWave.Add(EnemyOnRound[i]);
-            
-            enemiesOnWave.Add(enemyOnWave);
-        }
-
-        return enemiesOnWave;
+        return EnemyOnRound
+            .Select((enemy, index) => new { enemy, index })
+            .GroupBy(x => x.index / EnemyPerWave)
+            .Select(group => group.Select(x => x.enemy).ToList())
+            .ToList();
     }
 
 }
