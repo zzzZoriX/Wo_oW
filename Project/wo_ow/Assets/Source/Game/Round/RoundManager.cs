@@ -7,8 +7,8 @@ public class RoundManager : MonoBehaviour {
     public event Action OnRoundEnd;
     public int RoundNumber;
     public int RoundTime; // in seconds
+    public WaveManager WaveManager;
 
-    [SerializeField] private WaveManager _waveManager;
     private RoundConfig _currentRoundConfig;
     private CompleteStatus _status;
 
@@ -18,11 +18,11 @@ public class RoundManager : MonoBehaviour {
 
 
     private void Start() {
-        _waveManager.OnWaveEnd += RoundProcess;
+        WaveManager.OnWaveEnd += RoundProcess;
     }
 
     private void OnDisable() {
-        _waveManager.OnWaveEnd -= RoundProcess;
+        WaveManager.OnWaveEnd -= RoundProcess;
     }
 
     public void StartRound(int enemyPerRound, int enemyPerWave) {
@@ -38,8 +38,8 @@ public class RoundManager : MonoBehaviour {
         if (_status == CompleteStatus.Complete)
             return;
         
-        if (_currentRoundConfig.WavesCount == _waveManager.WaveNumber) {
-            _waveManager.WaveNumber = 0;
+        if (_currentRoundConfig.WavesCount == WaveManager.WaveNumber) {
+            WaveManager.WaveNumber = 0;
             _status = CompleteStatus.Complete;
             
             OnRoundEnd?.Invoke();
@@ -47,9 +47,9 @@ public class RoundManager : MonoBehaviour {
             return;
         }
         
-        _waveManager.StartWave( 
+        WaveManager.StartWave( 
             new WaveConfig(
-                _currentRoundConfig.EnemyOnWaves[_waveManager.WaveNumber],
+                _currentRoundConfig.EnemyOnWaves[WaveManager.WaveNumber],
                 _currentRoundConfig.EnemyPerWave
             )
         );

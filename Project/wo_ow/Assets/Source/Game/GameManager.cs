@@ -6,17 +6,20 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private GameObject player;
     private CompleteStatus _gameStatus;
     private GameConfig _config;
-    private GameStats _stats;
+    private EPR _epr;
 
 
+    public GameStats GetGameStats()
+        => new(roundManager.RoundNumber, roundManager.WaveManager.WaveNumber);
+    
     private void Start() {
-        _stats = new GameStats();
+        _epr = new EPR();
         
         _config = DeserializeData.Deserialize<GameConfig>("./Assets/Source/Data/GameConfig.json");
         
         roundManager.OnRoundEnd += ProcessGame;
 
-        _stats.EnemyPerRound = _config.DefaultEnemyPerRoundCount;
+        _epr.EnemyPerRound = _config.DefaultEnemyPerRoundCount;
     }
 
     private void OnDisable() {
@@ -43,9 +46,9 @@ public class GameManager : MonoBehaviour {
             return;
         }
 
-        roundManager.StartRound(_stats.EnemyPerRound, _stats.EnemyPerRound / _config.SplitFactor);
+        roundManager.StartRound(_epr.EnemyPerRound, _epr.EnemyPerRound / _config.SplitFactor);
         
-        _stats.IncreaseEnemiesOnRound(_config.EPRIncreaseValue);
+        _epr.IncreaseEnemiesOnRound(_config.EPRIncreaseValue);
     }
 
     /// <summary>

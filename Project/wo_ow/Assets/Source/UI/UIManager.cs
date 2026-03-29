@@ -3,12 +3,18 @@
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private UITexts _texts;
-    [SerializeField] private GameObject _player;
+    [SerializeField] private PlayerController _player;
+    [SerializeField] private GameManager _gameManager;
 
 
     private void Update()
     {
-        UpdateHP(_player.GetComponent<PlayerController>()._playerStats.HP);
+        UpdateHP(_player._playerStats.HP);
+        
+        if(_gameManager is null)
+            Debug.Log("Game manager is null");
+        UpdateWaveNumberText(_gameManager.GetGameStats().WaveNumber);
+        UpdateRoundNumberText(_gameManager.GetGameStats().RoundNumber);
     }
 
 //  playerp
@@ -32,7 +38,11 @@ public class UIManager : MonoBehaviour
     {
         _texts.RoundNumberText.text = roundNumber.ToString();
     }
-    
+
+    private void UpdateWaveNumberText(int waveNumber) {
+        _texts.WaveNumberText.text = "Wave: " + waveNumber;
+    }
+
 //  weapons
     private void UpdateLaserGunStats(float heatValue)
     {

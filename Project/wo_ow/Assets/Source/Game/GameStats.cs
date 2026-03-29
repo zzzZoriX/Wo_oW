@@ -1,6 +1,9 @@
 ﻿public class GameStats {
-    public int EnemyPerRound;
+    public int WaveNumber;
+    public int RoundNumber;
 
-    public void IncreaseEnemiesOnRound(int EPRIncreaseValue)
-        => EnemyPerRound += EPRIncreaseValue; 
+    public GameStats(int roundNumber, int waveNumber) {
+        WaveNumber = waveNumber;
+        RoundNumber = roundNumber;
+    }
 }
