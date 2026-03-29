@@ -1,0 +1,11 @@
+﻿{
+  "AbilityStabilityDecreaseFactor": 0.28,
+  "AbilityReloadTime": 2.0,
+  "AbilityHoldTime": 2.0,
+  "AbilityAttackReloadTime": 1.0,
+  "HeatPerShot": 10.0,
+  "HeatPerAbility": 40.0,
+  "MaxHeatValue": 100.0,
+  "ShotStabilityDecreaseFactor": 0.07,
+  "ShotReloadTime": 0.5
+}
