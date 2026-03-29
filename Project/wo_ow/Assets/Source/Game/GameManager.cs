@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
     private void Start() {
         _epr = new EPR();
         
-        _config = DeserializeData.Deserialize<GameConfig>("./Assets/Source/Data/GameConfig.json");
+        _config = DeserializeData.Deserialize<GameConfig>("Jsons/GameConfig");
         
         roundManager.OnRoundEnd += ProcessGame;
 

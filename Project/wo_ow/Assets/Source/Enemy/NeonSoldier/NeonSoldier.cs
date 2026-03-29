@@ -4,7 +4,7 @@ using UnityEngine;
 public class NeonSoldier : Enemy {
     private void Start()
     {
-        Settings = DeserializeData.Deserialize<EnemySettings>("./Assets/Source/Data/NeonSoldierData.json");
+        Settings = DeserializeData.Deserialize<EnemySettings>("Jsons/NeonSoldierData");
         Health.Initialize(Settings.HP);
     }
 

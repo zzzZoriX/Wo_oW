@@ -12,7 +12,7 @@ public class NSLaserGun : Weapon {
         _reloadTimer.DoWhile = false;
         _reloadTimer.Action += SetAttackStatus;
 
-        _weaponConfig = DeserializeData.Deserialize<NeonSoldierWeaponConfig>("./Assets/Source/Data/NeonSoldierWeaponConfig.json");
+        _weaponConfig = DeserializeData.Deserialize<NeonSoldierWeaponConfig>("Jsons/NeonSoldierWeaponConfig");
     }
 
     private void OnDisable() {

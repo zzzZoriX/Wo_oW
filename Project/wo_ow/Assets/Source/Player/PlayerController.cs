@@ -12,7 +12,7 @@ public class PlayerController : Entity
 
     private void Start()
     {
-        _userData = DeserializeData.Deserialize<UserData>("./Assets/Source/Data/UserData.json");
+        _userData = DeserializeData.Deserialize<UserData>("Jsons/UserData");
         _playerStats.HP.Initialize(80);
     }
     

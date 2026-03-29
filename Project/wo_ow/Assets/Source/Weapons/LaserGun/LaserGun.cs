@@ -13,7 +13,7 @@ public class LaserGun : PlayerWeapon
         _reloadTimer.Action += OnReloadEnd;
         _reloadTimer.DoWhile = false;
         
-        _lazerGunStats = DeserializeData.Deserialize<LaserGunStats>("./Assets/Source/Data/LaserGunData.json");
+        _lazerGunStats = DeserializeData.Deserialize<LaserGunStats>("Jsons/LaserGunData");
         Temperature.TempStats = new TemperatureStats(
             _lazerGunStats.MaxHeatValue,
             _lazerGunStats.HeatPerAbility,

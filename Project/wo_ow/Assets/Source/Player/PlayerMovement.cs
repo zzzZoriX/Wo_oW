@@ -13,8 +13,8 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float _dashReloadTimer = 0f;
 
     private void Start() {
-        _playerKeyConfig = DeserializeData.Deserialize<PlayerKeyConfig>("./Assets/Source/Data/PlayerKeyConfig.json");
-        _playerConfig = DeserializeData.Deserialize<PlayerConfig>("./Assets/Source/Data/PlayerConfig.json");
+        _playerKeyConfig = DeserializeData.Deserialize<PlayerKeyConfig>("Jsons/PlayerKeyConfig");
+        _playerConfig = DeserializeData.Deserialize<PlayerConfig>("Jsons/PlayerConfig");
 
         _dashCounter = 3;
     }
