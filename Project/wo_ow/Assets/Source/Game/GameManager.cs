@@ -2,6 +2,8 @@
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
+    public static GameManager Instance { get; private set; }
+
     [SerializeField] private RoundManager roundManager;
     [SerializeField] private GameObject player;
     private CompleteStatus _gameStatus;
@@ -19,6 +21,16 @@ public class GameManager : MonoBehaviour {
         => Time.timeScale = 1;
     
     private void Start() {
+        if (Instance != null && Instance != this) {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        
+        DontDestroyOnLoad(gameObject);
+        
+        
         _epr = new EPR();
         
         _config = DeserializeData.Deserialize<GameConfig>("Jsons/GameConfig");
