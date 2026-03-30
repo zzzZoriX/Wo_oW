@@ -44,6 +44,9 @@ public class PauseManager : MonoBehaviour {
         GamePaused = false;
         
         pauseUI.SetActive(false);
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Pause() {
@@ -53,5 +56,8 @@ public class PauseManager : MonoBehaviour {
         GamePaused = true;
         
         pauseUI.SetActive(true);
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 }
