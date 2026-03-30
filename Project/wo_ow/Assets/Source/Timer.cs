@@ -18,8 +18,11 @@ public class Timer : MonoBehaviour
     }
 
 
-    private void Update()
-    {
+    private void Update() {
+        if (PauseManager.Instance.GamePaused)
+            return;
+        
+        
         if (Current <= 0)
         {
             Action?.Invoke();

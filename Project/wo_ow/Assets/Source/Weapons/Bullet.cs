@@ -16,8 +16,11 @@ public class Bullet : WeaponAttack
         return Instantiate(prefab, position, rotation);
     }
 
-    private void Update()
-    {
+    private void Update() {
+        if (PauseManager.Instance.GamePaused)
+            return;
+        
+        
         transform.Translate(Direction, Space.Self);
     }
 }

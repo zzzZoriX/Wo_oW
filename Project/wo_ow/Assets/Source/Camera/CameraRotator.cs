@@ -13,8 +13,11 @@ public class CameraRotator : MonoBehaviour
         _userData = DeserializeData.Deserialize<UserData>("Jsons/UserData");
     }
 
-    private void Update()
-    {
+    private void Update() {
+        if (PauseManager.Instance.GamePaused)
+            return;
+        
+        
         Rotate();
     }
 

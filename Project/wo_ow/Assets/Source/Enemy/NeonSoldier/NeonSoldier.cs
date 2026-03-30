@@ -2,14 +2,18 @@
 using UnityEngine;
 
 public class NeonSoldier : Enemy {
-    private void Start()
-    {
+    private void Start() {
         Settings = DeserializeData.Deserialize<EnemySettings>("Jsons/NeonSoldierData");
         Health.Initialize(Settings.HP);
     }
 
-    private void Update()
-        => UpdateActions();
+    private void Update() {
+        if (PauseManager.Instance.GamePaused)
+            return;
+        
+        
+        UpdateActions();
+    }
 
     protected override void UpdateActions() {
         base.UpdateActions();

@@ -16,8 +16,11 @@ public class PlayerController : Entity
         _playerStats.HP.Initialize(80);
     }
     
-    private void Update()
-    {
+    private void Update() {
+        if (PauseManager.Instance.GamePaused)
+            return;
+        
+        
         var direction = PlayerStats.GetDirection();
      
         Controller.MoveEntity(direction, _playerStats._moveSpeed);

@@ -13,8 +13,13 @@ public class Enemy : Entity
         enemyControls.RotateToTarget();
     }
 
-    private void Update()
-        => UpdateActions();
+    private void Update() {
+        if (PauseManager.Instance.GamePaused)
+            return;
+        
+        
+        UpdateActions();
+    }
 
     protected virtual void UpdateActions() {
         // Attack(); // now this method is useless

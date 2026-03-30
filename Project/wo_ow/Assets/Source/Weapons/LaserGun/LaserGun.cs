@@ -26,8 +26,11 @@ public class LaserGun : PlayerWeapon
         _reloadTimer.Action -= OnReloadEnd;
     }
 
-    private void Update()
-    {
+    private void Update() {
+        if (PauseManager.Instance.GamePaused)
+            return;
+        
+        
         Shot();
         Ability();
     }
