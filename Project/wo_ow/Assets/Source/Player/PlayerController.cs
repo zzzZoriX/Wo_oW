@@ -2,9 +2,6 @@ using System;
 using UnityEngine;
 
 public class PlayerController : Entity {
-    public static GameObject PlayerInstance { get; private set; }
-
-
     [Header("Stats")] 
     public PlayerStats _playerStats;
 
@@ -15,15 +12,6 @@ public class PlayerController : Entity {
 
     private void Start()
     {
-        if (PlayerInstance != null && PlayerInstance != gameObject) {
-            Destroy(gameObject);
-
-            return;
-        }
-
-        PlayerInstance = gameObject;
-
-
         _userData = DeserializeData.Deserialize<UserData>("Jsons/UserData");
         var config = DeserializeData.Deserialize<PlayerConfig>("Jsons/PlayerConfig");
         

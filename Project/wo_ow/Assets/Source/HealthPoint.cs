@@ -29,4 +29,7 @@ public class HealthPoint : MonoBehaviour
 
     public float GetHealthPrecent()
         => HP / MaxHP;
+
+    public bool IsAlive()
+        => HP > 0;
 }

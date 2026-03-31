@@ -2,11 +2,14 @@
 using UnityEngine;
 
 public class NSLaserGun : Weapon {
+    private GameObject _player;
     private NeonSoldierWeaponConfig _weaponConfig;
     private Timer _reloadTimer;
 
 
     private void Start() {
+        _player = GameObject.Find("PlayerBase");
+        
         _reloadTimer = gameObject.AddComponent<Timer>();
 
         _reloadTimer.DoWhile = false;
@@ -27,7 +30,7 @@ public class NSLaserGun : Weapon {
         if (!stats.canAttack)
             return;
 
-        var rotation = Quaternion.LookRotation(PlayerController.PlayerInstance.transform.position);
+        var rotation = Quaternion.LookRotation(_player.transform.position);
         
         var projectile = Bullet.InstanceBullet(
             projectileSpawnPoint.position,
