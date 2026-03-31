@@ -25,7 +25,7 @@ public class PlayerController : Entity {
 
 
         _userData = DeserializeData.Deserialize<UserData>("Jsons/UserData");
-        _playerStats.HP.Initialize(80);
+        Health.Initialize(80);
     }
     
     private void Update() {

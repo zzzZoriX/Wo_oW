@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateHP(_player._playerStats.HP);
+        UpdateHP(_player.Health);
         
         UpdateWaveNumberText(_gameManager.GetGameStats().WaveNumber);
         UpdateRoundNumberText(_gameManager.GetGameStats().RoundNumber);

@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour {
     public EntityController Controller;
-    public HealthPoint Health; 
+    public HealthPoint Health { get; private set; }
     public bool IsAlive { get; private set; }
 
 
     private void Awake() {
         IsAlive = true;
+
+        Health = gameObject.AddComponent<HealthPoint>();
     }
 
     public void TakeDamage(float damage) {
