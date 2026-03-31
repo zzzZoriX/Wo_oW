@@ -12,9 +12,12 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private bool _canSlam;
     [SerializeField] private float _dashReloadTimer = 0f;
 
+
+    public void SetConfig(PlayerConfig config)
+        => _playerConfig = config;
+    
     private void Start() {
         _playerKeyConfig = DeserializeData.Deserialize<PlayerKeyConfig>("Jsons/PlayerKeyConfig");
-        _playerConfig = DeserializeData.Deserialize<PlayerConfig>("Jsons/PlayerConfig");
 
         _dashCounter = 3;
     }

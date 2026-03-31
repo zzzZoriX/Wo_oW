@@ -25,7 +25,11 @@ public class PlayerController : Entity {
 
 
         _userData = DeserializeData.Deserialize<UserData>("Jsons/UserData");
-        Health.Initialize(80);
+        var config = DeserializeData.Deserialize<PlayerConfig>("Jsons/PlayerConfig");
+        
+        Health.Initialize(config.HP);
+        
+        _playerMovement.SetConfig(config);
     }
     
     private void Update() {
