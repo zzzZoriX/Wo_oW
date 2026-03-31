@@ -26,11 +26,13 @@ public class NSLaserGun : Weapon {
     public override void Attack() {
         if (!stats.canAttack)
             return;
+
+        var rotation = Quaternion.LookRotation(PlayerController.PlayerInstance.transform.position);
         
         var projectile = Bullet.InstanceBullet(
             projectileSpawnPoint.position,
             stats.projectile,
-            transform.rotation
+            rotation
         );
 
         projectile.GetComponent<Bullet>().Damage = _weaponConfig.Damage;

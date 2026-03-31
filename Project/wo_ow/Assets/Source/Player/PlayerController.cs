@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
-public class PlayerController : Entity
-{
+public class PlayerController : Entity {
+    public static GameObject PlayerInstance { get; private set; }
+
+
     [Header("Stats")] 
     public PlayerStats _playerStats;
 
@@ -12,6 +15,15 @@ public class PlayerController : Entity
 
     private void Start()
     {
+        if (PlayerInstance != null && PlayerInstance != gameObject) {
+            Destroy(gameObject);
+
+            return;
+        }
+
+        PlayerInstance = gameObject;
+
+
         _userData = DeserializeData.Deserialize<UserData>("Jsons/UserData");
         _playerStats.HP.Initialize(80);
     }
@@ -40,5 +52,12 @@ public class PlayerController : Entity
         _playerStats.rotationY += mouseX;
         
         Controller.RotateEntity(Quaternion.Euler(0, _playerStats.rotationY, 0f));
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("EnemyProjectile")) {
+            TakeDamage(other.GetComponent<Bullet>().Damage);
+            Destroy(other.gameObject);
+        }
     }
 }

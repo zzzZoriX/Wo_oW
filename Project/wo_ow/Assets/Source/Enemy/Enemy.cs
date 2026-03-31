@@ -22,7 +22,7 @@ public class Enemy : Entity
     }
 
     protected virtual void UpdateActions() {
-        // Attack(); // now this method is useless
+        Attack();
         enemyControls.RotateToTarget();
     }
 
@@ -30,7 +30,7 @@ public class Enemy : Entity
         if (!attackZone.SomeoneInAttackRange)
             return;
 
-        if(attackZone.TagInAttackZone("Player"))
+        if(!attackZone.TagInAttackZone("Player"))
             return;
         
         _weapon.Attack();
@@ -38,7 +38,7 @@ public class Enemy : Entity
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Projectile"))
+        if (other.gameObject.CompareTag("PlayerProjectile"))
         {
             TakeDamage(other.gameObject.GetComponent<WeaponAttack>().Damage);
             Destroy(other.gameObject);
