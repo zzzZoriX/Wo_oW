@@ -2,7 +2,7 @@
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private UITexts _texts;
+    [SerializeField] private UIElements _elements;
     [SerializeField] private PlayerController _player;
     [SerializeField] private GameManager _gameManager;
 
@@ -18,42 +18,47 @@ public class UIManager : MonoBehaviour
 //  playerp
     private void UpdateHP(HealthPoint playerHP)
     {
-        _texts.HpText.text = string.Format("{0:F0} / {1:F0}", playerHP.HP, playerHP.MaxHP);
+        _elements.HpText.text = string.Format("{0:F0} / {1:F0}", playerHP.HP, playerHP.MaxHP);
+        
+        UpdateHealthBar(playerHP);
     }
+
+    private void UpdateHealthBar(HealthPoint playerHP)
+        => _elements.HealthBar.fillAmount = playerHP.GetHealthPrecent();
 
 //  game
     private void UpdateCoolPoints(int points)
     {
-        _texts.CoolPointsText.text = points.ToString();
+        _elements.CoolPointsText.text = points.ToString();
     }
 
     private void UpdateRoundTime(string time)
     {
-        _texts.RoundTimeRemainText.text = time;
+        _elements.RoundTimeRemainText.text = time;
     }
 
     private void UpdateRoundNumberText(int roundNumber)
     {
-        _texts.RoundNumberText.text = roundNumber.ToString();
+        _elements.RoundNumberText.text = roundNumber.ToString();
     }
 
     private void UpdateWaveNumberText(int waveNumber) {
-        _texts.WaveNumberText.text = "Wave: " + waveNumber;
+        _elements.WaveNumberText.text = "Wave: " + waveNumber;
     }
 
 //  weapons
     private void UpdateLaserGunStats(float heatValue)
     {
-        _texts.LaserGunHeatValueText.text = heatValue.ToString();
+        _elements.LaserGunHeatValueText.text = heatValue.ToString();
     }
 
     private void UpdateLaserShotgunStats(float heatValue)
     {
-        _texts.LaserShotgunHeatValueText.text = heatValue.ToString();
+        _elements.LaserShotgunHeatValueText.text = heatValue.ToString();
     }
 
     private void UpdateLaserBladeStats(float heatValue)
     {
-        _texts.LaserBladeHeatValue.text = heatValue.ToString();
+        _elements.LaserBladeHeatValue.text = heatValue.ToString();
     }
 }

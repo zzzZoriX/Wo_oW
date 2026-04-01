@@ -1,10 +1,12 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class UITexts : MonoBehaviour
+public class UIElements : MonoBehaviour
 {
     [Header("Player stats")]
     public TextMeshProUGUI HpText;
+    public Image HealthBar;
     
     [Header("Game")]
     public TextMeshProUGUI CoolPointsText;
