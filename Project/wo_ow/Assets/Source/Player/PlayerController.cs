@@ -11,7 +11,7 @@ public class PlayerController : Entity {
     private UserData _userData;
 
 
-    protected sealed override void Die() {
+    public sealed override void Die() {
         transform.Find("Main Camera").SetParent(null, true);
         
         base.Die();

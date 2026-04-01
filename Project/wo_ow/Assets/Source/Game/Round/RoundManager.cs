@@ -4,10 +4,10 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class RoundManager : MonoBehaviour {
-    public event Action OnRoundEnd;
+    public float RoundTime { get; private set; } // in seconds
     public int RoundNumber;
-    public int RoundTime; // in seconds
     public WaveManager WaveManager;
+    public event Action OnRoundEnd;
 
     private RoundConfig _currentRoundConfig;
     private CompleteStatus _status;
@@ -17,6 +17,17 @@ public class RoundManager : MonoBehaviour {
     };
 
 
+    public void StartRound(int enemyPerRound, int enemyPerWave, int roundTime) {
+        _currentRoundConfig = new RoundConfig(++RoundNumber, roundTime, enemyPerWave, GenerateEnemies(enemyPerRound));
+        _currentRoundConfig.EnemyOnWaves = _currentRoundConfig.SplitEnemies();
+
+        _status = CompleteStatus.NotComplete;
+
+        RoundTime = roundTime;
+        
+        RoundProcess();
+    }
+    
     private void Start() {
         WaveManager.OnWaveEnd += RoundProcess;
     }
@@ -25,13 +36,19 @@ public class RoundManager : MonoBehaviour {
         WaveManager.OnWaveEnd -= RoundProcess;
     }
 
-    public void StartRound(int enemyPerRound, int enemyPerWave) {
-        _currentRoundConfig = new RoundConfig(++RoundNumber, RoundTime, enemyPerWave, GenerateEnemies(enemyPerRound));
-        _currentRoundConfig.EnemyOnWaves = _currentRoundConfig.SplitEnemies();
+    private void Update() {
+        if (_status != CompleteStatus.Complete)
+            ProcessTime();
+    }
 
-        _status = CompleteStatus.NotComplete;
-        
-        RoundProcess();
+    private void ProcessTime() {
+        RoundTime -= Time.deltaTime;
+
+        if (RoundTime < 0) {
+            RoundTime = 0;
+
+            WaveManager.DestroyAllEnemies();
+        }
     }
 
     private void RoundProcess() {

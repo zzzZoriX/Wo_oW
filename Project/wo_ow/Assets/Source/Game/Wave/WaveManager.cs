@@ -26,6 +26,15 @@ public class WaveManager : MonoBehaviour {
         ++WaveNumber;
     }
 
+    public void DestroyAllEnemies() {
+        foreach (var enemy in _currentWaveStats.AliveEnemiesList) {
+            _currentWaveStats.AliveEnemiesList.Remove(enemy);
+            _currentWaveStats.AliveEnemiesCount--;
+            
+            enemy.Die();
+        }
+    }
+
     private void CheckWaveStatus() {
         if (_currentWaveStats.WaveCompleteStatus == CompleteStatus.Complete)
             return;

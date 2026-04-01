@@ -12,13 +12,7 @@ public class GameManager : MonoBehaviour {
 
 
     public GameStats GetGameStats()
-        => new(roundManager.RoundNumber, roundManager.WaveManager.WaveNumber);
-
-    public void FreezeGame()
-        => Time.timeScale = 0;
-
-    public void ResumeGame()
-        => Time.timeScale = 1;
+        => new(roundManager.RoundNumber, roundManager.WaveManager.WaveNumber, roundManager.RoundTime);
     
     private void Start() {
         if (Instance != null && Instance != this) {
@@ -64,7 +58,7 @@ public class GameManager : MonoBehaviour {
             return;
         }
 
-        roundManager.StartRound(_epr.EnemyPerRound, _epr.EnemyPerRound / _config.SplitFactor);
+        roundManager.StartRound(_epr.EnemyPerRound, _epr.EnemyPerRound / _config.SplitFactor, _config.RoundTime);
         
         _epr.IncreaseEnemiesOnRound(_config.EPRIncreaseValue);
     }

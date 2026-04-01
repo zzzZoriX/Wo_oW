@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class UIManager : MonoBehaviour
         
         UpdateWaveNumberText(_gameManager.GetGameStats().WaveNumber);
         UpdateRoundNumberText(_gameManager.GetGameStats().RoundNumber);
+        UpdateRoundTime(Math.Round(_gameManager.GetGameStats().RoundTime, 0).ToString());
     }
 
 //  playerp
@@ -60,5 +62,12 @@ public class UIManager : MonoBehaviour
     private void UpdateLaserBladeStats(float heatValue)
     {
         _elements.LaserBladeHeatValue.text = heatValue.ToString();
+    }
+    
+    
+// help methods
+    private string ConvertFloatTimeToString(float time) {
+        // TODO: implement this method
+        return "";
     }
 }

@@ -20,7 +20,7 @@ public class Entity : MonoBehaviour {
             Die();
     }
 
-    protected virtual void Die() {
+    public virtual void Die() {
         gameObject.SetActive(false);
         IsAlive = false;
     }
