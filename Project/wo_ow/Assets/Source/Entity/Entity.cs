@@ -13,14 +13,14 @@ public class Entity : MonoBehaviour {
         Health = gameObject.AddComponent<HealthPoint>();
     }
 
-    public void TakeDamage(float damage) {
+    protected virtual void TakeDamage(float damage) {
         Health.Decrease(damage);
         
         if(Health.HP <= 0)
             Die();
     }
 
-    private void Die() {
+    protected virtual void Die() {
         gameObject.SetActive(false);
         IsAlive = false;
     }
