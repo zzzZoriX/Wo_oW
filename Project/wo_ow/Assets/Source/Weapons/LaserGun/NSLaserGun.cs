@@ -30,7 +30,9 @@ public class NSLaserGun : Weapon {
         if (!stats.canAttack)
             return;
 
-        var rotation = Quaternion.LookRotation(_player.transform.position);
+        var directionToPlayer = (_player.transform.position - projectileSpawnPoint.position).normalized;
+        
+        var rotation = Quaternion.LookRotation(directionToPlayer);
         
         var projectile = Bullet.InstanceBullet(
             projectileSpawnPoint.position,
