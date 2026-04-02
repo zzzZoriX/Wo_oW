@@ -7,6 +7,7 @@ TagManager:
   - Projectile
   - EnemyProjectile
   - PlayerProjectile
+  - HealZone
   layers:
   - Default
   - TransparentFX

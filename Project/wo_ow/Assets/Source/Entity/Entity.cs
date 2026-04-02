@@ -4,7 +4,7 @@ using UnityEngine;
 public class Entity : MonoBehaviour {
     public EntityController Controller;
     public HealthPoint Health { get; private set; }
-    public bool IsAlive { get; private set; }
+    public bool IsAlive { get; protected set; }
 
 
     private void Awake() {

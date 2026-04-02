@@ -4,7 +4,7 @@ using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
 
-public class AttackZone : MonoBehaviour {
+public class Zone : MonoBehaviour {
     public bool SomeoneInAttackRange { get; private set; }
     public List<GameObject> ObjectsInZone { get; private set; }
 

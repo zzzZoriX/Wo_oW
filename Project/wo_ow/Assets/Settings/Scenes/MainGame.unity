@@ -2061,7 +2061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa8090f1c9de42d892b939396cee7746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NeonSoldierPrefab: {fileID: 1853735127905573740, guid: 333fe762882af6949b7228eaacc5a2a8,
+  NeonSoldierPrefab: {fileID: 8825218006306203125, guid: f57dca4ac2b09e44986eea01f5f9f89d,
     type: 3}
   EyeOfGodPrefab: {fileID: 6681581223246931396, guid: 646eb5dada2413c429d4ab8451f1db66,
     type: 3}
@@ -2419,7 +2419,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.46770373}
   m_AnchorMax: {x: 0.24452086, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0.9998779}
   m_SizeDelta: {x: -1, y: 2}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &676073771

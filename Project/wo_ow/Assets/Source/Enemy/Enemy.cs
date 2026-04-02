@@ -1,20 +1,42 @@
-using System;
+using System.Collections;
 using UnityEngine;
 
 public class Enemy : Entity
 {
     [SerializeField] protected EnemyControls enemyControls;
-    [SerializeField] protected AttackZone attackZone;
+    [SerializeField] protected Zone zone;
     [SerializeField] private Weapon _weapon;
+    [SerializeField] private GameObject blood;
+    private Timer _bloodDestroyerTimer;
     protected EnemySettings Settings;
+
+
+    public override void Die() {
+        var instantiatedBlood = Instantiate(blood, transform);
+
+        var bloodParticles = instantiatedBlood.GetComponent<ParticleSystem>();
+        
+        bloodParticles.Emit(50);
+        bloodParticles.Play();
+        
+        StartCoroutine(DestroyBlood(instantiatedBlood));
+        
+        transform.GetChild(0).gameObject.SetActive(false);
+        IsAlive = false;
+    }
 
 
     private void Start() {
         enemyControls.RotateToTarget();
+
+        _bloodDestroyerTimer = gameObject.AddComponent<Timer>();
+        
+        _bloodDestroyerTimer.DoWhile = false;
+        _bloodDestroyerTimer.Set(2);
     }
 
     private void Update() {
-        if (PauseManager.Instance.GamePaused)
+        if (PauseManager.Instance.GamePaused || !IsAlive)
             return;
         
         
@@ -27,10 +49,10 @@ public class Enemy : Entity
     }
 
     private void Attack() {
-        if (!attackZone.SomeoneInAttackRange)
+        if (!zone.SomeoneInAttackRange)
             return;
 
-        if(!attackZone.TagInAttackZone("Player"))
+        if(!zone.TagInAttackZone("Player"))
             return;
         
         _weapon.Attack();
@@ -43,5 +65,12 @@ public class Enemy : Entity
             TakeDamage(other.gameObject.GetComponent<WeaponAttack>().Damage);
             Destroy(other.gameObject);
         }
+    }
+
+    private IEnumerator DestroyBlood(GameObject instantiatedBlood) {
+        yield return new WaitForSeconds(2);
+
+        Destroy(instantiatedBlood);
+        Destroy(gameObject);
     }
 }
