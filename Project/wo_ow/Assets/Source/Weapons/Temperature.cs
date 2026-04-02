@@ -49,6 +49,9 @@ public class Temperature : MonoBehaviour
         _cooldownRemaining.Run();
     }
 
+    public float GetHeatPrecentage()
+        => _stats.currentHeatValue / TempStats.MaxHeatValue * 100;
+
     private void OnCoolingCooldownEnd()
     {
         var coolingTime = GetCoolingTime();

@@ -4,10 +4,13 @@ public class UserUIManger : MonoBehaviour {
     [Header("UI Elements")] 
     [SerializeField] private GameObject PauseUI;
     [SerializeField] private GameObject DieUI;
+    [SerializeField] private GameObject WeaponStatsUI;
 
     [Header("Objects")] 
     [SerializeField] private PlayerController player;
     [SerializeField] private PauseManager pauseManager;
+
+    private bool _weaponStatsHiden;
 
 
     public void Quit() {
@@ -42,6 +45,7 @@ public class UserUIManger : MonoBehaviour {
     private void Update() {
         Pause();
         Die();
+        HideNShotWeaponStats();
     }
 
     private void Die() {
@@ -51,5 +55,14 @@ public class UserUIManger : MonoBehaviour {
         pauseManager.Pause();
         
         DieUI.SetActive(true);
+    }
+
+    private void HideNShotWeaponStats() {
+        if (!Input.GetKeyDown(KeyCode.Tab))
+            return;
+
+        _weaponStatsHiden = !_weaponStatsHiden;
+        
+        WeaponStatsUI.SetActive(_weaponStatsHiden);
     }
 }

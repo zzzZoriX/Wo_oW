@@ -16,6 +16,7 @@ public class UIElements : MonoBehaviour
     
     [Header("Weapons stats")]
     public TextMeshProUGUI LaserGunHeatValueText;
+    public Image LaserGunHeatValueImage;
 //  TODO:
     public TextMeshProUGUI LaserShotgunHeatValueText;
     public TextMeshProUGUI LaserBladeHeatValue;

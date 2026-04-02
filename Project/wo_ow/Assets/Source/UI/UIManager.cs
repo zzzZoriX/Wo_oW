@@ -4,6 +4,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private UIElements _elements;
+    [SerializeField] private PlayerWeapons _weapons;
     [SerializeField] private PlayerController _player;
     [SerializeField] private GameManager _gameManager;
 
@@ -15,6 +16,8 @@ public class UIManager : MonoBehaviour
         UpdateWaveNumberText(_gameManager.GetGameStats().WaveNumber);
         UpdateRoundNumberText(_gameManager.GetGameStats().RoundNumber);
         UpdateRoundTime(Math.Round(_gameManager.GetGameStats().RoundTime, 0).ToString());
+        
+        UpdateLaserGunStats(_weapons.PlayerLaserGun.Temperature.GetHeatPrecentage());
     }
 
 //  playerp
@@ -49,10 +52,16 @@ public class UIManager : MonoBehaviour
     }
 
 //  weapons
-    private void UpdateLaserGunStats(float heatValue)
-    {
-        _elements.LaserGunHeatValueText.text = heatValue.ToString();
+    private void UpdateLaserGunStats(float heatValue) {
+        heatValue = Convert.ToSingle(Math.Round(heatValue, 0));
+        
+        _elements.LaserGunHeatValueText.text = heatValue + "%";
+        
+        UpdateLaserGunImage(heatValue / 100);
     }
+
+    private void UpdateLaserGunImage(float heatValue)
+        => _elements.LaserGunHeatValueImage.fillAmount = heatValue;
 
     private void UpdateLaserShotgunStats(float heatValue)
     {
