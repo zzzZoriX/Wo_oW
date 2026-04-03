@@ -8,6 +8,7 @@ public class RoundManager : MonoBehaviour {
     public int RoundNumber;
     public WaveManager WaveManager;
     public event Action OnRoundEnd;
+    public Result Result { get; private set; }
 
     private RoundConfig _currentRoundConfig;
     private CompleteStatus _status;
@@ -24,6 +25,8 @@ public class RoundManager : MonoBehaviour {
         _status = CompleteStatus.NotComplete;
 
         RoundTime = roundTime;
+
+        Result = Result.Unknown;
         
         RoundProcess();
     }
@@ -48,6 +51,12 @@ public class RoundManager : MonoBehaviour {
             RoundTime = 0;
 
             WaveManager.DestroyAllEnemies();
+
+            Result = Result.Lose;
+            
+            EndRound();
+            
+            return;
         }
     }
 
@@ -56,10 +65,9 @@ public class RoundManager : MonoBehaviour {
             return;
         
         if (_currentRoundConfig.WavesCount == WaveManager.WaveNumber) {
-            WaveManager.WaveNumber = 0;
-            _status = CompleteStatus.Complete;
-            
-            OnRoundEnd?.Invoke();
+            Result = Result.Win;
+
+            EndRound();
             
             return;
         }
@@ -70,6 +78,13 @@ public class RoundManager : MonoBehaviour {
                 _currentRoundConfig.EnemyPerWave
             )
         );
+    }
+
+    private void EndRound() {
+        WaveManager.WaveNumber = 0;
+        _status = CompleteStatus.Complete;
+            
+        OnRoundEnd?.Invoke();
     }
 
     private List<Enemies> GenerateEnemies(int count) {
