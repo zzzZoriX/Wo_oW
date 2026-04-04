@@ -1,10 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using TMPro;
+using UnityEngine;
 
 public class UserUIManger : MonoBehaviour {
     [Header("UI Elements")] 
     [SerializeField] private GameObject PauseUI;
-    [SerializeField] private GameObject DieUI;
     [SerializeField] private GameObject WeaponStatsUI;
+    
+    [Header("Death")]
+    [SerializeField] private GameObject DieUI;
+    [SerializeField] private TextMeshProUGUI TotalPoints;
 
     [Header("Objects")] 
     [SerializeField] private PlayerController player;
@@ -55,6 +60,8 @@ public class UserUIManger : MonoBehaviour {
         pauseManager.Pause();
         
         DieUI.SetActive(true);
+
+        TotalPoints.text = Math.Round(player.CoolPoints.Points).ToString();
     }
 
     private void HideNShotWeaponStats() {
