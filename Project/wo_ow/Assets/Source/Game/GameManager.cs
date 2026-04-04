@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
     public static GameManager Instance { get; private set; }
+    public static GameObject Player { get; set; }
 
     [SerializeField] private RoundManager roundManager;
     [SerializeField] private GameObject player;
@@ -12,7 +13,7 @@ public class GameManager : MonoBehaviour {
 
 
     public GameStats GetGameStats()
-        => new(roundManager.RoundNumber, roundManager.WaveManager.WaveNumber, roundManager.RoundTime);
+        => new(roundManager.RoundNumber, roundManager.WaveManager.WaveNumber, roundManager.RoundTime, roundManager.Result);
     
     private void Start() {
         if (Instance != null && Instance != this) {
@@ -23,6 +24,8 @@ public class GameManager : MonoBehaviour {
         Instance = this;
         
         DontDestroyOnLoad(gameObject);
+
+        Player = player;
         
         
         _epr = new EPR();

@@ -6,8 +6,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private UIElements _elements;
     [SerializeField] private PlayerWeapons _weapons;
     [SerializeField] private PlayerController _player;
-    [SerializeField] private GameManager _gameManager;
-
+    [SerializeField] private GameManager _gameManager; 
 
     private void Update()
     {
@@ -16,6 +15,7 @@ public class UIManager : MonoBehaviour
         UpdateWaveNumberText(_gameManager.GetGameStats().WaveNumber);
         UpdateRoundNumberText(_gameManager.GetGameStats().RoundNumber);
         UpdateRoundTime(Math.Round(_gameManager.GetGameStats().RoundTime, 0).ToString());
+        UpdateCoolPoints(Convert.ToInt32(_player.CoolPoints.Points));
         
         UpdateLaserGunStats(_weapons.PlayerLaserGun.Temperature.GetHeatPrecentage());
     }

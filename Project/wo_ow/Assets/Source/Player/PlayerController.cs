@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using KillTypes;
 
 public class PlayerController : Entity {
     [Header("Stats")] 
@@ -25,12 +26,15 @@ public class PlayerController : Entity {
         Health.Initialize(config.HP);
         
         _playerMovement.SetConfig(config);
+        
+        CoolPoints.Set();
     }
     
     private void Update() {
         if (PauseManager.Instance.GamePaused)
             return;
         
+        SetStates();
         
         var direction = PlayerStats.GetDirection();
      
@@ -51,6 +55,11 @@ public class PlayerController : Entity {
         _playerStats.rotationY += mouseX;
         
         Controller.RotateEntity(Quaternion.Euler(0, _playerStats.rotationY, 0f));
+    }
+
+    private void SetStates() {
+        PlayerState.Moving = PlayerStats.GetDirection().magnitude > 0.1f || PlayerStats.GetDirection().magnitude < -0.1f;
+        PlayerState.Falling = !_playerMovement.IsGrounded;
     }
 
     private void OnTriggerEnter(Collider other) {

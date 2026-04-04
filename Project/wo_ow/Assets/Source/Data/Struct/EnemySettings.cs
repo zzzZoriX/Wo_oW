@@ -2,5 +2,5 @@
 {
     public float HP;
     public float MoveSpeed;
-    public float Damage;
+    public float Points;
 }

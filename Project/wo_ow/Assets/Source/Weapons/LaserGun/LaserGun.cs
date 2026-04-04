@@ -43,6 +43,8 @@ public class LaserGun : PlayerWeapon
             transform.rotation
         );
 
+        projectile.GetComponent<Bullet>().Creator = transform.parent.parent.gameObject;
+        
         projectile.GetComponent<Bullet>().Damage = Convert.ToSingle(Math.Round(
             stats.ShotDamage * stats.stability, 1
         ));

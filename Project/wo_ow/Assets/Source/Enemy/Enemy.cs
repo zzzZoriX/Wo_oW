@@ -23,6 +23,8 @@ public class Enemy : Entity
         
         transform.GetChild(0).gameObject.SetActive(false);
         IsAlive = false;
+        
+        GameManager.Player.GetComponent<PlayerController>().CoolPoints.Add(CoolPoints, KillTypes.PlayerState.ConvertStateToKillTypes());
     }
 
 

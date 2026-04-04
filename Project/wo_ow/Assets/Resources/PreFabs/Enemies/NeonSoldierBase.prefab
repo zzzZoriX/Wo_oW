@@ -359,6 +359,7 @@ GameObject:
   - component: {fileID: 1640643948689551726}
   - component: {fileID: 52288507243823922}
   - component: {fileID: 9190392355974961209}
+  - component: {fileID: -316715532648196773}
   m_Layer: 0
   m_Name: NeonSoldierBase
   m_TagString: Untagged
@@ -395,6 +396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Controller: {fileID: 52288507243823922}
+  CoolPoints: {fileID: -316715532648196773}
   enemyControls: {fileID: 1640643948689551726}
   zone: {fileID: 5908011136079945380}
   _weapon: {fileID: 3881399435096369066}
@@ -463,6 +465,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &-316715532648196773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8825218006306203125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8effa8879cb547d58815f475b539b4b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9092257245274581202
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using UnityEngine;
 public class Bullet : WeaponAttack
 {
     public Vector3 Direction { get; private set; }
+    public GameObject Creator;
 
     public void Shoot(Vector3 direction, float lifeTime)
     {

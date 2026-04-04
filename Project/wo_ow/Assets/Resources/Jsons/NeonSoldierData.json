@@ -1,4 +1,5 @@
 ﻿{
   "HP": 10,
-  "MoveSpeed": 6.0
+  "MoveSpeed": 6.0,
+  "Points": 300.0
 }

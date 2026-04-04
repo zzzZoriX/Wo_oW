@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
+    public bool IsGrounded { get; private set; }
+    public int DashCounter { get; private set; }
+    public bool CanSlam { get; private set; }
+    public float DashReloadTimer { get; private set; }
+
     [Header("Components")]
     [SerializeField] private Rigidbody _rigidbody;
     private PlayerKeyConfig _playerKeyConfig;
     private PlayerConfig _playerConfig;
-    
-    [Header("Stats")]
-    [SerializeField] private bool _isGrounded;
-    [SerializeField] private int _dashCounter;
-    [SerializeField] private bool _canSlam;
-    [SerializeField] private float _dashReloadTimer = 0f;
 
 
     public void SetConfig(PlayerConfig config)
@@ -19,7 +18,7 @@ public class PlayerMovement : MonoBehaviour {
     private void Start() {
         _playerKeyConfig = DeserializeData.Deserialize<PlayerKeyConfig>("Jsons/PlayerKeyConfig");
 
-        _dashCounter = 3;
+        DashCounter = 3;
     }
 
     private void Update() {
@@ -32,16 +31,16 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void Jump(float jumpForce) {
-        if (Input.GetKeyDown(_playerKeyConfig.JumpKC) && _isGrounded) {
+        if (Input.GetKeyDown(_playerKeyConfig.JumpKC) && IsGrounded) {
             _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
-            _isGrounded = false;
-            _canSlam = true;
+            IsGrounded = false;
+            CanSlam = true;
         }
     }
 
     public void Dash(Vector3 direction) {
-        if (Input.GetKeyDown(_playerKeyConfig.DashKC) && _dashCounter != 0) {
+        if (Input.GetKeyDown(_playerKeyConfig.DashKC) && DashCounter != 0) {
             var dashDir = direction.magnitude > 0.1f ? 
                 direction.normalized : transform.forward;
             var space = direction.magnitude > 0.1f ? Space.Self : Space.World;
@@ -61,24 +60,24 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void GroundSlam() {
-        if (Input.GetKeyDown(_playerKeyConfig.SlamKC) && _canSlam) {
+        if (Input.GetKeyDown(_playerKeyConfig.SlamKC) && CanSlam) {
             _rigidbody.AddForce(Vector3.down * _playerConfig.SlamForce, ForceMode.Impulse);
-            _canSlam = false;
+            CanSlam = false;
         }
     }
 
     private void CheckForGround() {
-        _isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.1f);
+        IsGrounded = Physics.Raycast(transform.position, Vector3.down, 1.1f);
     }
 
     private void DashReload() {
-        if (_dashCounter < _playerConfig.MaxDashCount)
+        if (DashCounter < _playerConfig.MaxDashCount)
         {
-            _dashReloadTimer += Time.deltaTime;
-            if (_dashReloadTimer >= _playerConfig.DashCooldown)
+            DashReloadTimer += Time.deltaTime;
+            if (DashReloadTimer >= _playerConfig.DashCooldown)
             {
-                ++_dashCounter;
-                _dashReloadTimer = 0f;
+                ++DashCounter;
+                DashReloadTimer = 0f;
             }
         }
     }
