@@ -14,7 +14,7 @@ public class Entity : MonoBehaviour {
         Health = gameObject.AddComponent<HealthPoint>();
     }
 
-    protected virtual void TakeDamage(float damage) {
+    public virtual void TakeDamage(float damage) {
         Health.Decrease(damage);
         
         if(Health.HP <= 0)

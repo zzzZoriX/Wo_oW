@@ -4,8 +4,8 @@ using UnityEngine;
 public class Enemy : Entity
 {
     [SerializeField] protected EnemyControls enemyControls;
-    [SerializeField] protected Zone zone;
-    [SerializeField] private Weapon _weapon;
+    [SerializeField] protected Zone stopZone;
+    [SerializeField] protected EnemyAnimator enemyAnimator;
     [SerializeField] private GameObject blood;
     private Timer _bloodDestroyerTimer;
     protected EnemySettings Settings;
@@ -46,18 +46,37 @@ public class Enemy : Entity
     }
 
     protected virtual void UpdateActions() {
-        Attack();
+        StartAttackAnimation();
         enemyControls.RotateToTarget();
     }
 
-    private void Attack() {
-        if (!zone.SomeoneInAttackRange)
-            return;
+    public void Attack() {
+        if (!stopZone.TagInAttackZone("Player")) return;
 
-        if(!zone.TagInAttackZone("Player"))
-            return;
         
-        _weapon.Attack();
+        var spawnPos = transform;
+        spawnPos.position += new Vector3(0, 0, 0.7f);
+
+        var attackZoneObject = Instantiate(
+            new GameObject("AttackZone"),
+            spawnPos
+        );
+
+        
+        var attackZone = attackZoneObject.AddComponent<BoxCollider>();
+
+        attackZone.size = new Vector3(2f, 2.2f, 1f);
+        
+        var zoneComponent = attackZoneObject.AddComponent<Zone>();
+        
+
+        var player = zoneComponent.FindObjectInZone("Player");
+
+        if (player != null)
+            player.GetComponent<PlayerController>().TakeDamage(Settings.Damage);
+
+        
+        Destroy(attackZoneObject);
     }
     
     private void OnTriggerEnter(Collider other)
@@ -74,5 +93,10 @@ public class Enemy : Entity
 
         Destroy(instantiatedBlood);
         Destroy(gameObject);
+    }
+
+    private void StartAttackAnimation() {
+        if (stopZone.SomeoneInAttackRange && stopZone.TagInAttackZone("Player"))
+            enemyAnimator.SetAttackTrigger();
     }
 }

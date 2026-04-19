@@ -11,5 +11,9 @@ public class NeonSoldierController : EnemyControls{
             targetPosition,
             speed * Time.deltaTime
         );
+        
+        CurrentSpeed = (transform.position.z - lastPosition.z) * 100;
+
+        lastPosition = transform.position;
     }
 }

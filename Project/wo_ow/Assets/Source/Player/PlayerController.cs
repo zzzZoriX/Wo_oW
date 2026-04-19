@@ -61,11 +61,4 @@ public class PlayerController : Entity {
         PlayerState.Moving = PlayerStats.GetDirection().magnitude > 0.1f || PlayerStats.GetDirection().magnitude < -0.1f;
         PlayerState.Falling = !_playerMovement.IsGrounded;
     }
-
-    private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag("EnemyProjectile")) {
-            TakeDamage(other.GetComponent<Bullet>().Damage);
-            Destroy(other.gameObject);
-        }
-    }
 }

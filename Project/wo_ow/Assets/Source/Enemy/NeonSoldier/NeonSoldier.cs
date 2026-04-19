@@ -20,8 +20,14 @@ public class NeonSoldier : Enemy {
 
     protected override void UpdateActions() {
         base.UpdateActions();
-        
-        if(!zone.TagInAttackZone("Player"))
+
+        if (!stopZone.TagInAttackZone("Player")) {
             enemyControls.MoveToTarget(Settings.MoveSpeed);
+        }
+        else {
+            enemyControls.CurrentSpeed = 0f;
+        }
+        
+        enemyAnimator.SetBlend(enemyControls.CurrentSpeed);
     }
 }

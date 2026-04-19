@@ -1,9 +1,11 @@
 ﻿using System;
 using UnityEngine;
 
-public class EnemyControls : MonoBehaviour
-{
+public class EnemyControls : MonoBehaviour {
+    public float CurrentSpeed;
+    
     protected GameObject target;
+    protected Vector3 lastPosition;
 
     [SerializeField] private float rotateSpeed;
 

@@ -1774,10 +1774,10 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_NearPlane: 0.1
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -2205,7 +2205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa8090f1c9de42d892b939396cee7746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NeonSoldierPrefab: {fileID: 8825218006306203125, guid: f57dca4ac2b09e44986eea01f5f9f89d,
+  NeonSoldierPrefab: {fileID: 8825218006306203125, guid: 44ee6a8177610364cbace2ddc8c401b3,
     type: 3}
   EyeOfGodPrefab: {fileID: 6681581223246931396, guid: 646eb5dada2413c429d4ab8451f1db66,
     type: 3}
