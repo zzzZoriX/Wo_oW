@@ -8,8 +8,8 @@ public class EnemyAnimator : MonoBehaviour {
         enemy.Attack();
     }
 
-    public void SetAttackTrigger() {
-        animator.SetTrigger("Attack");
+    public void SetHitTrigger() {
+        animator.SetTrigger("Hit");
     }
 
     public void SetBlend(float blend)

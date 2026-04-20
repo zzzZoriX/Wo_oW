@@ -1,7 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.AI;
 
 public class NeonSoldier : Enemy {
+    [SerializeField] private NavMeshAgent agent;
+    
     private void Start() {
         Settings = DeserializeData.Deserialize<EnemySettings>("Jsons/NeonSoldierData");
         
@@ -14,20 +16,28 @@ public class NeonSoldier : Enemy {
         if (PauseManager.Instance.GamePaused)
             return;
         
+        if(attackZone.TagInAttackZone("Player"))
+            enemyAnimator.SetHitTrigger();
         
-        UpdateActions();
+        Move();
     }
 
-    protected override void UpdateActions() {
-        base.UpdateActions();
+    public override void Attack() {
+        var player = attackZone.FindObjectInZone("Player"); // never be null cause this method will not be invoked without player in attack zone
+        
+        player?.GetComponent<PlayerController>().TakeDamage(Settings.Damage); // player?. <- useless check
+    }
 
-        if (!stopZone.TagInAttackZone("Player")) {
-            enemyControls.MoveToTarget(Settings.MoveSpeed);
+    private void Move() {
+        if (!attackZone.TagInAttackZone("Player")) {
+            agent.SetDestination(enemyControls.Target.transform.position);
+            agent.isStopped = false;
         }
         else {
-            enemyControls.CurrentSpeed = 0f;
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
         }
         
-        enemyAnimator.SetBlend(enemyControls.CurrentSpeed);
+        enemyAnimator.SetBlend(agent.velocity.normalized.magnitude);
     }
 }
