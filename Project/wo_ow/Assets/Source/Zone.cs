@@ -13,11 +13,13 @@ public class Zone : MonoBehaviour {
         ObjectsInZone = new List<GameObject>();
     }
 
-    [CanBeNull] 
-    public GameObject FindObjectInZone(string tag)
-        => ObjectsInZone.Find(go => {
-            return go.CompareTag(tag);
-        });
+    [CanBeNull]
+    public GameObject FindObjectInZone(string tag) {
+        if (!SomeoneInAttackRange)
+            return null;
+        
+        return ObjectsInZone.Find(go => go.CompareTag(tag));
+    }
 
     public bool TagInAttackZone(string tag) {
         foreach (var go in ObjectsInZone) {
