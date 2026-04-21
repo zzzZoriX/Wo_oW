@@ -23,9 +23,11 @@ public class NeonSoldier : Enemy {
     }
 
     public override void Attack() {
-        var player = attackZone.FindObjectInZone("Player"); // never be null cause this method will not be invoked without player in attack zone
-        
-        player?.GetComponent<PlayerController>().TakeDamage(Settings.Damage); // player?. <- useless check
+        var player = attackZone.FindObjectInZone("Player"); 
+
+        if (player == null) return;
+
+        player.GetComponent<PlayerController>().TakeDamage(Settings.Damage);
     }
 
     private void Move() {
