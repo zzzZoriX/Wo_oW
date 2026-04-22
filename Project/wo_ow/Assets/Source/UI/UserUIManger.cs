@@ -1,6 +1,7 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UserUIManger : MonoBehaviour {
     [Header("UI Elements")] 
@@ -28,6 +29,9 @@ public class UserUIManger : MonoBehaviour {
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
     }
+
+    public void Menu()
+        => SceneManager.LoadScene("MainMenu");
 
     public void Pause() {
         if (!Input.GetKeyDown(KeyCode.Escape))
