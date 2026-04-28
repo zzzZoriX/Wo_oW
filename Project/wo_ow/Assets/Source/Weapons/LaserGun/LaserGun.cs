@@ -80,7 +80,8 @@ public class LaserGun : PlayerWeapon
                 stats.AbilityDamage * stats.stability, 1
             ));
 
-            abilityProjectile.GetComponent<Bullet>().Damage = stats.AbilityDamage;
+            abilityProjectile.GetComponent<Bullet>().Creator = transform.parent.parent.gameObject;
+
             abilityProjectile.GetComponent<Bullet>().Shoot(
                 Vector3.forward * stats.ProjectileSpeed,
                 stats.AbilityProjectileLifeTime
