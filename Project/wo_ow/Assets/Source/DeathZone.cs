@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-public class DeathZone : MonoBehaviour
-{
-    private void OnCollisionEnter(Collision other)
+public class DeathZone : MonoBehaviour {
+    private void OnTriggerEnter(Collider other) 
         => other.gameObject.GetComponent<Entity>().Die();
 }
