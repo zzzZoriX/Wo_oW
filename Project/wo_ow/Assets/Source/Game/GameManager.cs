@@ -70,6 +70,6 @@ public class GameManager : MonoBehaviour {
     /// invoke when player complete all rounds and teleport him to the lobby
     /// </summary>
     private void EndGame() {
-        player.transform.position = new Vector3(); // <- set value to the lobby coordinates
+        player.transform.position = new Vector3(2000, 0, 0); // <- set value to the lobby coordinates
     }
 }
