@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class AudioSystem : MonoBehaviour
 {
-    public static GameObject Instance;
+    private static GameObject _instance;
 
     [SerializeField] private AudioSource source;
     [SerializeField] private AudioSwitcher switcher;
     [SerializeField] private TextMeshProUGUI currentlyPlaying;
+    [SerializeField] private TextMeshProUGUI audioDuration;
+    [SerializeField] private float hueLimit;
+    [SerializeField] private float rainbowSpeed;
 
-    private float _audioDuration = 0;
+    private float _audioDuration = 0, _audioLength;
+    private float _hue = 0f;
 
 
     private void Awake() {
-        if (Instance == null) {
+        if (_instance == null) {
             DontDestroyOnLoad(gameObject);
-            Instance = gameObject;
+            _instance = gameObject;
         }
         else {
             Destroy(gameObject);
@@ -28,9 +32,10 @@ public class AudioSystem : MonoBehaviour
     }
 
     private void HandleAudioSwitch() {
-        if (_audioDuration <= 0) {
+        if (_audioDuration >= _audioLength) {
             var generatedAudio = switcher.GenerateAudio();
-            _audioDuration = generatedAudio.Clip.length;
+            _audioDuration = 0;
+            _audioLength = generatedAudio.Clip.length;
 
             source.clip = generatedAudio.Clip;
 
@@ -39,7 +44,27 @@ public class AudioSystem : MonoBehaviour
             source.Play();
         }
         else {
-            _audioDuration -= Time.deltaTime;
+            _audioDuration += Time.deltaTime;
         }
+        
+        DoRainbow();
+
+        var length = TimeSpan.FromSeconds(_audioLength);
+        var remaining = TimeSpan.FromSeconds(_audioDuration);
+
+        audioDuration.text = string.Format("{0:D2}:{1:D2}", remaining.Minutes, remaining.Seconds) +
+                             " / " +
+                             string.Format("{0:D2}:{1:D2}", length.Minutes, length.Seconds);
+    }
+
+    private void DoRainbow() {
+        _hue += Time.deltaTime * rainbowSpeed;
+
+        if (_hue > hueLimit) {
+            _hue -= hueLimit;
+        }
+
+        currentlyPlaying.color = Color.HSVToRGB(_hue, 1f, 1f);
+        audioDuration.color = Color.HSVToRGB(_hue, 1f, 1f);
     }
 }
