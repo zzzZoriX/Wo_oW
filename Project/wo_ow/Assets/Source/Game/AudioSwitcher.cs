@@ -1,16 +1,12 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class AudioSwitcher : MonoBehaviour
 {
-    [SerializeField] private AudioSource source;
-
     private List<Audio> _audioList;
 
     private int _lastLoaded = -1;
-    private float _audioDuration = 0;
 
 
     private void Awake() {
@@ -22,27 +18,7 @@ public class AudioSwitcher : MonoBehaviour
         };    
     }
 
-    private void Update() {
-        HandleAudioSwitch();
-    }
-
-    private void HandleAudioSwitch() {
-        if (_audioDuration <= 0) {
-            var audio = GenerateAudio();
-            _audioDuration = audio.Clip.length;
-
-            source.clip = audio.Clip;
-
-            // TODO: do show which sound currently playing
-            
-            source.Play();
-        }
-        else {
-            _audioDuration -= Time.deltaTime;
-        }
-    }
-
-    private Audio GenerateAudio() {
+    public Audio GenerateAudio() {
         var index = -1;
 
         do {
