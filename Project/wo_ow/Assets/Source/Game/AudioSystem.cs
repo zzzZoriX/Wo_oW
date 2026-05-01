@@ -29,6 +29,7 @@ public class AudioSystem : MonoBehaviour
     
     private void Update() {
         HandleAudioSwitch();
+        SetVolume();
     }
 
     private void HandleAudioSwitch() {
@@ -66,5 +67,9 @@ public class AudioSystem : MonoBehaviour
 
         currentlyPlaying.color = Color.HSVToRGB(_hue, 1f, 1f);
         audioDuration.color = Color.HSVToRGB(_hue, 1f, 1f);
+    }
+
+    private void SetVolume() {
+        source.volume = SettingsManager.Settings.Volume;
     }
 }
