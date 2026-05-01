@@ -3,6 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuUIManager : MonoBehaviour
 {
+    [SerializeField] private GameObject settingsCanvas;
+    
+    
     public void Exit() {
         Application.Quit();
         
@@ -15,6 +18,10 @@ public class MainMenuUIManager : MonoBehaviour
         => SceneManager.LoadScene("MainGame");
 
     public void Settings() {
-        // todo
+        settingsCanvas.SetActive(true);
+    }
+
+    public void ExitSettings() {
+        settingsCanvas.SetActive(false);
     }
 }
