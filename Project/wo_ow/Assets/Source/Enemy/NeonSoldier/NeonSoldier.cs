@@ -28,6 +28,8 @@ public class NeonSoldier : Enemy {
         if (player == null) return;
 
         player.GetComponent<PlayerController>().TakeDamage(Settings.Damage);
+        
+        AudioPlayer.GetPlayer().PlayOnce(AudioPlayer.GetPlayer().AvailableClips["NSAttack"]);
     }
 
     private void Move() {

@@ -28,6 +28,11 @@ public class Enemy : Entity
         
         StartCoroutine(DestroyBlood(instantiatedBlood));
         
+        
+        AudioPlayer.GetPlayer().PlayOnce(AudioPlayer.GetPlayer().AvailableClips["DeadByLG"]);
+
+        
+        
         transform.GetChild(0).gameObject.SetActive(false);
         IsAlive = false;
         

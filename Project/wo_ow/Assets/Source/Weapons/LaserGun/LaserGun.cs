@@ -58,6 +58,8 @@ public class LaserGun : PlayerWeapon
         Stability.ChangeStability(_lazerGunStats.ShotStabilityDecreaseFactor);
         Temperature.StartCoolingCooldown();
         
+        AudioPlayer.GetPlayer().PlayOnce(AudioPlayer.GetPlayer().AvailableClips["LGAttack"]);
+
 
         stats.canAttack = false;
         _reloadTimer.Set(_lazerGunStats.ShotReloadTime);
@@ -94,6 +96,8 @@ public class LaserGun : PlayerWeapon
             Stability.ChangeStability(_lazerGunStats.AbilityStabilityDecreaseFactor);
             Temperature.StartCoolingCooldown();
             
+            AudioPlayer.GetPlayer().PlayOnce(AudioPlayer.GetPlayer().AvailableClips["LGAbilityShot"]);
+            
 
             stats.canAttack = false;
             _reloadTimer.Set(_lazerGunStats.AbilityAttackReloadTime);
@@ -120,6 +124,8 @@ public class LaserGun : PlayerWeapon
                 stats.AbilityReady = true;
                 
                 WeaponAnimator.SetAbilityReady(true);
+                
+                AudioPlayer.GetPlayer().PlayOnce(AudioPlayer.GetPlayer().AvailableClips["LGAbilityReady"]);
             }
             else
             {
