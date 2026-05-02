@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class SettingsUIObjects : MonoBehaviour
 {
+    public GameObject MainCanvas;
+    
     public Scrollbar Sensitivity;
     public TextMeshProUGUI SensitivityText;
 

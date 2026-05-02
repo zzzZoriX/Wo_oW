@@ -5,6 +5,7 @@ public class LaserGun : PlayerWeapon
 {
     private LaserGunStats _lazerGunStats;
     private Timer _reloadTimer;
+    private int _abilityReadySoundLoopIndex = -1;
 
 
     private void Start()
@@ -70,6 +71,9 @@ public class LaserGun : PlayerWeapon
     {
         if (stats.AbilityReady && Input.GetKeyUp(stats.AbilityKey))
         {
+            AudioPlayer.GetPlayer().DestroyLoop(_abilityReadySoundLoopIndex);
+            _abilityReadySoundLoopIndex = -1;
+            
             WeaponAnimator.SetAbilityReady(false);
             
             var abilityProjectile = Bullet.InstanceBullet(
@@ -125,7 +129,8 @@ public class LaserGun : PlayerWeapon
                 
                 WeaponAnimator.SetAbilityReady(true);
                 
-                AudioPlayer.GetPlayer().PlayOnce(AudioPlayer.GetPlayer().AvailableClips["LGAbilityReady"]);
+                if(_abilityReadySoundLoopIndex == -1)
+                    _abilityReadySoundLoopIndex = AudioPlayer.GetPlayer().PlayLoop(AudioPlayer.GetPlayer().AvailableClips["LGAbilityReady"]);
             }
             else
             {

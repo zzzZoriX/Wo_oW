@@ -1,11 +1,25 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenuUIManager : MonoBehaviour
 {
+    public static MainMenuUIManager Instance { get; private set; }
+
     [SerializeField] private GameObject settingsCanvas;
-    
-    
+
+
+    private void Awake() {
+        if (Instance == null) {
+            Instance = gameObject.GetComponent<MainMenuUIManager>();
+            
+            settingsCanvas = SettingsManager.Canvas;
+        }
+        else {
+            Destroy(gameObject);
+        }
+    }
+
     public void Exit() {
         Application.Quit();
         
@@ -19,9 +33,5 @@ public class MainMenuUIManager : MonoBehaviour
 
     public void Settings() {
         settingsCanvas.SetActive(true);
-    }
-
-    public void ExitSettings() {
-        settingsCanvas.SetActive(false);
     }
 }

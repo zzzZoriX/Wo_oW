@@ -1,9 +1,11 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
 {
-    public static Settings Settings;
+    public static Settings Settings { get; private set; }
+    public static GameObject Canvas { get; private set; }
 
     [SerializeField] private SettingsUIObjects uiObjects;
     private static GameObject _instance;
@@ -14,6 +16,10 @@ public class SettingsManager : MonoBehaviour
             _instance = gameObject;
             
             DontDestroyOnLoad(gameObject);
+
+            SettingsManager.Canvas = uiObjects.MainCanvas;
+
+            SettingsManager.Settings = new Settings();
         }
         else {
             Destroy(gameObject);
@@ -37,5 +43,9 @@ public class SettingsManager : MonoBehaviour
         SettingsManager.Settings.Volume = uiObjects.Volume.value / 2;
 
         uiObjects.VolumeText.text = Math.Round(uiObjects.Volume.value, 2).ToString();
+    }
+
+    public void ExitSettings() {
+        SettingsManager.Canvas.SetActive(false);
     }
 }

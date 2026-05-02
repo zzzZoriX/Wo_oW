@@ -490,6 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ffda03d5668444a917f33b5bef60c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MainCanvas: {fileID: 1996016676}
   Sensitivity: {fileID: 173370929}
   SensitivityText: {fileID: 1439750931}
   Volume: {fileID: 1257383941}
@@ -1638,8 +1639,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1411444915}
-        m_TargetAssemblyTypeName: MainMenuUIManager, Assembly-CSharp
+      - m_Target: {fileID: 453732979}
+        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: ExitSettings
         m_Mode: 1
         m_Arguments:
