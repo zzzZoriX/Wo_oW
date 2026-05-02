@@ -7,7 +7,9 @@ public class AudioPlayer : MonoBehaviour
     public Dictionary<string, AudioClip> AvailableClips { get; private set; }
 
     [SerializeField] private AudioSource source;
-    private static GameObject _instance; 
+    private static GameObject _instance;
+
+    private List<GameObject> _loopPlayers;
 
 
     private void Awake() {
@@ -21,6 +23,8 @@ public class AudioPlayer : MonoBehaviour
                 { "LGAbilityShot", Resources.Load<AudioClip>("Music/sfx/lasergunabiltyshot") },
                 { "DeadByLG", Resources.Load<AudioClip>("Music/sfx/deadbylasergun") }
             };
+
+            _loopPlayers = new List<GameObject>();
         }
         else {
             Destroy(gameObject);
@@ -31,4 +35,24 @@ public class AudioPlayer : MonoBehaviour
 
     public void PlayOnce(AudioClip clip)
         => source.PlayOneShot(clip);
+
+    public int PlayLoop(AudioClip clip) {
+        var index = _loopPlayers.Count;
+        
+        _loopPlayers.Add(new GameObject());
+
+        var loopSource = _loopPlayers[index].AddComponent<AudioSource>();
+
+        loopSource.loop = true;
+        loopSource.clip = clip;
+        loopSource.Play();
+
+        return index;
+    }
+
+    public void DestroyLoop(int index) {
+        _loopPlayers[index].GetComponent<AudioSource>().Stop();
+        
+        _loopPlayers.RemoveAt(index);
+    }
 }
