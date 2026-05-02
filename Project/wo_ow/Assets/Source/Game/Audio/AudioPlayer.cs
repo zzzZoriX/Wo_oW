@@ -31,6 +31,10 @@ public class AudioPlayer : MonoBehaviour
         }
     }
 
+    private void Update() {
+        source.volume = SettingsManager.Settings.Volume;
+    }
+
     public static AudioPlayer GetPlayer() => AudioPlayer._instance.GetComponent<AudioPlayer>();
 
     public void PlayOnce(AudioClip clip)
@@ -45,6 +49,7 @@ public class AudioPlayer : MonoBehaviour
 
         loopSource.loop = true;
         loopSource.clip = clip;
+        loopSource.volume = SettingsManager.Settings.Volume;
         loopSource.Play();
 
         return index;
