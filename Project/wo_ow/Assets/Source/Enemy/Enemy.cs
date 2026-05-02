@@ -28,10 +28,7 @@ public class Enemy : Entity
         
         StartCoroutine(DestroyBlood(instantiatedBlood));
         
-        
         AudioPlayer.GetPlayer().PlayOnce(AudioPlayer.GetPlayer().AvailableClips["DeadByLG"]);
-
-        
         
         transform.GetChild(0).gameObject.SetActive(false);
         IsAlive = false;
@@ -41,8 +38,9 @@ public class Enemy : Entity
     
     public virtual void Attack() { }
     
-    private void OnTriggerEnter(Collider other)
-    {
+    private void OnTriggerEnter(Collider other) {
+        if (!IsAlive) return;
+        
         if (other.gameObject.CompareTag("PlayerProjectile"))
         {
             TakeDamage(other.gameObject.GetComponent<WeaponAttack>().Damage);

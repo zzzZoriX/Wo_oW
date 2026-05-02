@@ -13,7 +13,7 @@ public class NeonSoldier : Enemy {
     }
 
     private void Update() {
-        if (PauseManager.Instance.GamePaused)
+        if (PauseManager.Instance.GamePaused || !IsAlive)
             return;
         
         if(attackZone.TagInAttackZone("Player"))
