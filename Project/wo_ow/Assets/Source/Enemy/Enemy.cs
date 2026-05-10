@@ -7,6 +7,7 @@ public class Enemy : Entity
     [SerializeField] protected EnemyControls enemyControls;
     [SerializeField] protected Zone attackZone;
     [SerializeField] private GameObject blood;
+    [SerializeField] private float hitDistance;
     private Timer _bloodDestroyerTimer;
     protected EnemySettings Settings;
 
@@ -45,6 +46,8 @@ public class Enemy : Entity
         {
             TakeDamage(other.gameObject.GetComponent<WeaponAttack>().Damage);
             Destroy(other.gameObject);
+            
+            transform.Translate(transform.position - Vector3.back * hitDistance);
         }
     }
 

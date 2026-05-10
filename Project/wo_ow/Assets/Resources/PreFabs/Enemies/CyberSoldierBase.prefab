@@ -1531,6 +1531,7 @@ MonoBehaviour:
   enemyControls: {fileID: 5198147734127490770}
   attackZone: {fileID: 6945935404008036629}
   blood: {fileID: 6980534365123645795, guid: d67207e0fc999524e8b3aeee73f0ba76, type: 3}
+  hitDistance: 1
   agent: {fileID: 7852603385418839133}
 --- !u!114 &2339226809443266579
 MonoBehaviour:
@@ -1556,6 +1557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22efea03e93c446b943b01870c477b16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigidbody: {fileID: 0}
 --- !u!114 &-316715532648196773
 MonoBehaviour:
   m_ObjectHideFlags: 0
