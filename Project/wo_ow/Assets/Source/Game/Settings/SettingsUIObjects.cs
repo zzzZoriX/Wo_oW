@@ -11,4 +11,7 @@ public class SettingsUIObjects : MonoBehaviour
 
     public Scrollbar Volume;
     public TextMeshProUGUI VolumeText;
+
+    public Scrollbar SFXVolume;
+    public TextMeshProUGUI SFXVolumeText;
 }

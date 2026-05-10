@@ -5,4 +5,5 @@
    
    // cosmetic
    public float Volume;
+   public float SFXVolume;
 }

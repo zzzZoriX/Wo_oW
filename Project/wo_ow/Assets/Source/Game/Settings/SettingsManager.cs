@@ -31,6 +31,7 @@ public class SettingsManager : MonoBehaviour
     private void Update() {
         UpdateSensitivity();
         UpdateVolume();
+        UpdateSfxVolume();
     }
 
     private void UpdateSensitivity() {
@@ -43,6 +44,12 @@ public class SettingsManager : MonoBehaviour
         SettingsManager.Settings.Volume = uiObjects.Volume.value / 2;
 
         uiObjects.VolumeText.text = Math.Round(uiObjects.Volume.value, 2).ToString();
+    }
+
+    private void UpdateSfxVolume() {
+        SettingsManager.Settings.SFXVolume = uiObjects.SFXVolume.value / 2;
+
+        uiObjects.SFXVolumeText.text = Math.Round(uiObjects.SFXVolume.value, 2).ToString();
     }
 
     public void ExitSettings() {
