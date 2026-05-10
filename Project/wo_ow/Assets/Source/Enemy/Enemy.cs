@@ -46,8 +46,13 @@ public class Enemy : Entity
         {
             TakeDamage(other.gameObject.GetComponent<WeaponAttack>().Damage);
             Destroy(other.gameObject);
-            
-            transform.Translate(transform.position - Vector3.back * hitDistance);
+
+            // TODO: complete this code
+            // transform.position = new Vector3(
+            //     transform.position.x,
+            //     transform.position.y,
+            //     transform.position.z - 1 * hitDistance
+            // );
         }
     }
 
