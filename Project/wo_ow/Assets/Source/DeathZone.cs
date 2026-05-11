@@ -2,5 +2,5 @@
 
 public class DeathZone : MonoBehaviour {
     private void OnTriggerEnter(Collider other) 
-        => other.gameObject.GetComponent<Entity>().Die();
+        => other.gameObject.GetComponent<PlayerController>().TakeDamage(1000);
 }

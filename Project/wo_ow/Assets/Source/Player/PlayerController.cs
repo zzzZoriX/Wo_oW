@@ -12,9 +12,6 @@ public class PlayerController : Entity {
     private UserData _userData;
 
 
-    public sealed override void Die()
-        => gameObject.SetActive(false);
-
     private void Start()
     {
         _userData = DeserializeData.Deserialize<UserData>("Jsons/UserData");
