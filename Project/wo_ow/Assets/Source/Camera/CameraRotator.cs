@@ -11,6 +11,8 @@ public class CameraRotator : MonoBehaviour
         Cursor.visible = false;
         
         _userData = DeserializeData.Deserialize<UserData>("Jsons/UserData");
+
+        _userData.sensitivity *= SettingsManager.Settings.Sensitivity;
     }
 
     private void Update() {

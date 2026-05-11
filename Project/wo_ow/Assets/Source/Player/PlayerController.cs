@@ -25,6 +25,8 @@ public class PlayerController : Entity {
         _playerMovement.SetConfig(config);
         
         CoolPoints.Set();
+
+        _userData.sensitivity *= SettingsManager.Settings.Sensitivity;
     }
     
     private void Update() {
